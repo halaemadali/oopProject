@@ -7,9 +7,8 @@ public class RoomType {
         this. NO3= NO3;
         this.capacity=capacity;
         this.basePrice= basePrice;
-
     }
-
+public RoomType(){}
 
 
     public String getNO3(){
