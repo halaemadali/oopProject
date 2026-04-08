@@ -14,8 +14,12 @@ public Room(){
         return false;
         
     }
-    public void addamenity()
-    {
-        
+      public void addAmenity(String amenity) {
+        amenities.add(amenity);
+        System.out.println(amenity + " added successfully!");
     }
+     public void removeAmenity(String amenity) {
+        amenities.remove(amenity);
+        System.out.println(amenity + " removed successfully!");
+    } 
 }
