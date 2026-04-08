@@ -111,8 +111,20 @@ public void setUsername(String username) {
        //login
        //View Available Rooms
   public List<Room> viewAvailableRooms(){
+   for(Room room:HotelDatabase.rooms){
+       if (room.isAvailable()) {
+                availableRooms.add(room);
+            }
+        }
+return availableRooms;
+       
+   }
+
+    //make Reservation
+    public void makeReservation()
+
 
     
   }
   
-}
+
