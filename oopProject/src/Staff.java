@@ -5,7 +5,7 @@ public abstract class Staff {
     private String username;
     private String password;
     private LocalDate dateOfBirth;
-    private Role role;
+    private Role role;  //ADMIN or RECEPTIONIST
     private int workingHours;
 
       //Constructor
@@ -86,6 +86,43 @@ public abstract class Staff {
         this.workingHours = workingHours;
     }
 
+
+          //Common Behaviors
+      
+      //Prints all guests in the system
+       public void viewAllGuests(){
+        for(Guest g : HotelDatabase.guests) {
+            System.out.println(g);
+        }
+    }
+
+    
+    // Prints all rooms in the system
+     public void viewAllRooms() {
+        for (Room r : HotelDatabase.rooms){
+            System.out.println(r);
+         }
+    }
+    
+
+      // Prints all reservations in the system
+     public void viewAllReservations() {
+        for (Reservation res : HotelDatabase.reservations) {
+            System.out.println(res);
+        }
+    }
+    
+
+  //Returns a string representation of the Staff member
+     @Override
+    public String toString(){
+        return "username: "+ username + ",Role" + role + "Working Hours " + workingHours ;
+
+    }
+
+
+
+}
 
     
 
