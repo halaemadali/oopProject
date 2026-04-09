@@ -1,7 +1,7 @@
 class HotelDatabase {
 
-    
-    static Iterable<Room> rooms;
+ public static ArrayList<Guest> guests = new ArrayList<>();
+    public static ArrayList<Room> rooms = new ArrayList<>();
     
 }
 
