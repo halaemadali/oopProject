@@ -1,6 +1,11 @@
+
+package com.mycompany.main;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+
 public class Guest {
 
 // Variables
@@ -13,11 +18,17 @@ public class Guest {
 
     private List<RoomType> roomPreferences;
     private List<Reservation> reservations;
+    private List<Room> availableRooms;
 
 
 
    //Constructor
-    public Guest();
+  public Guest() {
+    this.availableRooms = new ArrayList<>();
+    this.reservations = new ArrayList<>();
+}
+
+   
     public Guest(String username, String password, LocalDate dateOfBirth,
                  double balance, String address, Gender gender,
                  List<RoomType> roomPreferences) {
@@ -30,6 +41,7 @@ public class Guest {
         this.gender = gender;
         this.roomPreferences = roomPreferences != null ? roomPreferences : new ArrayList<>();
         this.reservations = new ArrayList<>();
+        this.availableRooms = new ArrayList<>();
     }
 
 
@@ -108,23 +120,68 @@ public void setUsername(String username) {
  //methodes
 
        //register
+    
+    public void register(){
+    
+    for (Guest g : HotelDatabase.guests) {
+        
+        if(g.getUsername().equals(this.username)){
+          System.out.println("Username already exists!");
+                return;
+        }
+    }
+      HotelDatabase.guests.add(this);
+      System.out.println("Registered successfully!");
+    }
+    
        //login
+    
+   public static Guest login(String username, String password){
+    for (Guest g : HotelDatabase.guests) {
+        if (g.getUsername().equals(username) &&
+                g.getPassword().equals(password)) {
+
+                System.out.println("Login successful!");
+                return g;
+            }
+     
+     }
+    
+    System.out.println("Invalid username or password!");
+    return null;
+    
+    }
+    
+    
+    
        //View Available Rooms
   public List<Room> viewAvailableRooms(){
-   for(Room room:HotelDatabase.rooms){
-       if (room.isAvailable()) {
-                availableRooms.add(room);
-            }
+        availableRooms.clear();
+    for (Room room : HotelDatabase.rooms) {
+        if (room.getisavailable()) {   
+            availableRooms.add(room);
         }
-return availableRooms;
+    }
+
+    return availableRooms;
        
    }
 
     //make Reservation
-    public void makeReservation()
+    public void makeReservation(Room room){
+    
+    
+    
+    
+    }
+
+    
 
 
     
   }
   
+
+
+ 
 
