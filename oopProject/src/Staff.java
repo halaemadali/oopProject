@@ -116,7 +116,7 @@ public abstract class Staff {
   //Returns a string representation of the Staff member
      @Override
     public String toString(){
-        return "username: "+ username + ",Role" + role + "Working Hours " + workingHours ;
+        return "username: "+ username + " ,Role" + role + " ,Working Hours " + workingHours ;
 
     }
 
