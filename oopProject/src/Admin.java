@@ -90,9 +90,110 @@ public class Admin extends Staff {
      }
      
 
+      //view Room Type
+    public void viewRoomType(String NO3) {
+        System.out.println("\n=========== VIEW ROOM TYPE =========");
+        for (RoomType t : HotelDatabase.roomTypes) {
+            if (t.getNO3().equalsIgnoreCase(NO3)) {
+
+                System.out.println("Type: " + t.getNO3());
+                System.out.println("Capacity: " + t.getCapacity());
+                System.out.println("Base Price: " + t.getBasePrice());
+                
+                return;
+            }
+        }
+
+        System.out.println("RoomType not found");
+    }
 
 
-  
+     
+     // Update room type
+    public void updateRoomType(String NO3, int newCapacity, double newBasePrice) {
+        for (RoomType t : HotelDatabase.roomTypes) {
+            if (t.getNO3().equalsIgnoreCase(NO3)) {
 
+                t.setCapacity(newCapacity);
+                t.setBasePrice(newBasePrice);
+
+                System.out.println("RoomType updated successfully");
+                return;
+            }
+        }
+        System.out.println("RoomType not found");
+    }
+
+
+
+ // Delete room type
+    public void deleteRoomType(String NO3) {
+        for (int i = 0; i < HotelDatabase.roomTypes.size(); i++) {
+            if (HotelDatabase.roomTypes.get(i).getNO3().equalsIgnoreCase(NO3)) {
+
+                HotelDatabase.roomTypes.remove(i);
+                System.out.println("RoomType deleted successfully");
+                return;
+            }
+        }
+
+        System.out.println("RoomType not found");
+    }
+
+
+      //Add Amenity
+    public void addAmenity(String name) {
+        Amenity a = new Amenity(name);
+        HotelDatabase.amenities.add(a);
+        System.out.println("Amenity added: " + name);
+    }
+
+
+     
+    //View all amenity
+    public void viewAllAmenities() {
+        if (HotelDatabase.amenities.isEmpty()) {
+            System.out.println("No amenities found");
+            return;
+        }
+
+        System.out.println("\n========= ALL AMENITIES =========");
+
+        for (Amenity a : HotelDatabase.amenities) {
+            System.out.println(a.getAmenity());
+
+        }
+        System.out.println("======================================= \n");
+    }
+
+
+     
+    //Update Amenity
+    public void updateAmenity(String oldAmenity, String newAmenity) {
+        for (Amenity a : HotelDatabase.amenities) {
+            if (a.getAmenity().equalsIgnoreCase(oldAmenity)) {
+                a.setamenity(newAmenity);
+                System.out.println("Amenity updated");
+                return;
+            }
+        }
+        System.out.println("Amenity not found");
+    }
+
+
+     
+     //Delete Amenity
+    public void deleteAmenity(String name) {
+        for (int i = 0; i < HotelDatabase.amenities.size(); i++) {
+            if (HotelDatabase.amenities.get(i).getAmenity().equalsIgnoreCase(name)) {
+                HotelDatabase.amenities.remove(i);
+                System.out.println("Amenity deleted");
+                return;
+            }
+        }
+        System.out.println("Amenity not found");
+    }
+
+}
 
 }
