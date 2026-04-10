@@ -12,6 +12,7 @@ package com.mycompany.main;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 public class Main {
     public static void main(String[] args) {
@@ -52,7 +53,7 @@ public class Main {
 
     
 
-    // Guest
+   // Guest
     Guest g1 = new Guest();
     g1.setUsername("mariam");
     g1.setPassword("123456");
@@ -77,17 +78,35 @@ r1.setisavailable(true);
     for (Room room : available) {
     System.out.println("Available Room: " + room.getroomnumber());
 }
-}
-        
-        
-        
-        
-        
-        
-        
-        
 
+        
+        
+        
+        
+        // create reservation
+        Reservation res = null;
+       try {
+            res = new Reservation(
+                    1,
+                    r,
+                    g1,
+                    new Date(),
+                    new Date(System.currentTimeMillis() + 86400000),
+                    ReservationStatus.PENDING
+            );
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    res.confirm();
+    // add reservation
+    g1.makeReservation(res);
+   g1.cancelReservation(res);
+    g1.viewReservations();
+    g1.checkout();
+    
+        
+        
 
     }
-
+    }
 
