@@ -10,6 +10,12 @@ public class Room {
     public Room(){
 
     }
+    public Room(int roomnumber, RoomType type, boolean isavailable, double price) {
+        this.roomnumber = roomnumber;
+        this.type = type;
+        this.isavailable = isavailable;
+        this.price = price;
+    }
     public RoomType gettype(){
         return type ;
     }
