@@ -19,7 +19,7 @@ public class Guest {
     private List<RoomType> roomPreferences;
     
     private List<Room> availableRooms;
-private List<Reservation> reservations = new ArrayList<>();
+private List<Reservation> reservations ;
 
 
    //Constructor
