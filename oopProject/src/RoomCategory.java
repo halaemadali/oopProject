@@ -1,0 +1,4 @@
+package com.mycompany.oopproject;
+public enum RoomCategory {
+    SINGLE,DOUBLE,SUITE;
+}
