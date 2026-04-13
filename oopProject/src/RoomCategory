@@ -1,5 +1,5 @@
-package com.mycompany.main;
-public enum RoomCategory{
-single , double,suite ;  
-
+package com.mycompany.oopproject;
+public enum RoomCategory {
+    SINGLE,DOUBLE,SUITE;
 }
+
