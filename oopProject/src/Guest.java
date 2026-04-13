@@ -158,8 +158,7 @@ public void setUsername(String username) throws InvalidUsernameException {
   public List<Room> viewAvailableRooms(){
         availableRooms.clear();
     for (Room room : HotelDatabase.rooms) {
-    if ((roomPreferences == null || roomPreferences.contains(room.gettype()))
-        && room.getisavailable()) {
+    if (roomPreferences.contains(room.gettype()) && room.getisavailable()) {
         
         availableRooms.add(room);
     }
