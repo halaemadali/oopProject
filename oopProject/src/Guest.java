@@ -31,7 +31,7 @@ private List<Reservation> reservations ;
    
     public Guest(String username, String password, LocalDate dateOfBirth,
                  double balance, String address, Gender gender,
-                 List<RoomType> roomPreferences)throws InvalidUsernameException  {
+                 List<RoomType> roomPreferences)throws InvalidUsernameException , Exception  {
 
          setUsername(username);
         setPassword(password);//set for validation
@@ -76,13 +76,12 @@ public void setUsername(String username) throws InvalidUsernameException {
         return password;
     }
 
-    public void setPassword(String password) {
-
+  public void setPassword(String password) throws Exception {
     if (password == null) {
-        System.out.println("Password is null");
+        throw new Exception("Password cannot be null");
     } 
     else if (password.length() < 6) {
-        System.out.println("Password must be at least 6 characters");
+        throw new Exception("Password must be at least 6 characters");
     } 
     else {
         this.password = password;
@@ -158,7 +157,8 @@ public void setUsername(String username) throws InvalidUsernameException {
   public List<Room> viewAvailableRooms(){
         availableRooms.clear();
     for (Room room : HotelDatabase.rooms) {
-    if (roomPreferences.contains(room.gettype()) && room.getisavailable()) {
+    if ((roomPreferences == null || roomPreferences.contains(room.gettype()))
+        && room.getisavailable()) {
         
         availableRooms.add(room);
     }
@@ -211,10 +211,6 @@ public void checkout() {
     
   }
   
-
-
-  
-
 
 
     
