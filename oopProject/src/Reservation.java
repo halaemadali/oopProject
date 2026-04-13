@@ -96,9 +96,10 @@ public class Reservation {
     public int getDuration(){
         if (checkout == null || checkin == null) return 0;
         long milliseconds = checkout.getTime() - checkin.getTime();
-        long days = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(milliseconds);
-        if ((int)days == 0) days++;
-        return (int)days;
+        double days = milliseconds / (1000.0 * 60 * 60 * 24);
+        if (days < 1)
+            return 1;
+        return (int)Math.ceil(days);
     }
 
     // validates date entry
