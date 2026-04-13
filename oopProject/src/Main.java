@@ -1,15 +1,10 @@
 
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-
-
 package com.mycompany.main;
 
 
 
 
-
+import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,12 +49,46 @@ public class Main {
     
 
    // Guest
-    Guest g1 = new Guest();
-    g1.setUsername("mariam");
-    g1.setPassword("123456");
+    Scanner input = new Scanner(System.in);
+
+Guest g1 = new Guest();
+
+// username
+String username;
+while (true) {
+    System.out.println("Enter username:");
+    username = input.nextLine();
+
+    try {
+        g1.setUsername(username);
+        break; // لو صح → اخرج من اللوب
+    } catch (InvalidUsernameException e) {
+        System.out.println(e.getMessage());
+    }
+}
+
+String password;
+while (true) {
+    System.out.println("Enter password:");
+    password = input.nextLine();
+
+    try {
+        g1.setPassword(password);
+        break; // valid → اخرج من اللوب
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+    }
+}
+
     g1.setBalance(1000);
 
     g1.register();
+    
+    
+    
+   
+    
+    
 
     // Login
     Guest loggedIn = Guest.login("mariam", "123456");
@@ -109,4 +138,5 @@ r1.setisavailable(true);
 
     }
     }
+
 
