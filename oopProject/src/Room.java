@@ -1,70 +1,165 @@
+package com.mycompany.ppppp;
+
 import java.util.ArrayList;
 
 public class Room {
-    private int roomnumber;
+    private int roomNumber;
     private RoomType type;
-   public ArrayList<Amenity> amenities=new ArrayList<>();
-    private boolean isavailable ;
+    private ArrayList<Amenity> amenities = new ArrayList<>();
+    private boolean isAvailable;
     private double price;
 
-    public Room(){
+    // Constants
+    private static final int MAXROOMNUMBER = 1000000;
+    private static final double MAXPRICE = 1000000;
 
+    // Default constructor
+    public Room() {
     }
-    public Room(int roomnumber, RoomType type, boolean isavailable, double price) {
-        this.roomnumber = roomnumber;
+
+    // Constructor with validation error
+    public Room(int roomNumber, RoomType type, boolean isAvailable, double price) {
+        setRoomNumber(roomNumber);
+        setType(type);
+        setAvailable(isAvailable);
+        setPrice(price);
+    }
+
+    
+    public RoomType getType() {
+        return type;
+    }
+
+    public void setType(RoomType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Room type cannot be null");
+        }
         this.type = type;
-        this.isavailable = isavailable;
+
+       
+        if (this.price != 0 && this.price < type.getBasePrice()) {
+            throw new IllegalArgumentException("Price cannot be less than base price of room type");
+        }
+    }
+
+  
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        if (roomNumber <= 0) {
+            throw new IllegalArgumentException("Room number must be positive");
+        }
+
+        if (roomNumber > MAXROOMNUMBER) {
+            throw new IllegalArgumentException("Room number too large");
+        }
+
+        this.roomNumber = roomNumber;
+    }
+
+    
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        if (Double.isNaN(price) || Double.isInfinite(price)) {
+            throw new IllegalArgumentException("Price cannot be NaN or infinite");
+        }
+
+        if (price <= 0) {
+            throw new IllegalArgumentException("Price must be greater than 0");
+        }
+
+        if (price > MAXPRICE) {
+            throw new IllegalArgumentException("Price exceeds maximum allowed");
+        }
+
+        if (type != null && price < type.getBasePrice()) {
+            throw new IllegalArgumentException("Price cannot be less than base price of room type");
+        }
+
         this.price = price;
     }
-    public RoomType gettype(){
-        return type ;
-    }
-    public void  settype(RoomType type){
-        this.type=type;
 
-    }
-    public int getroomnumber(){
-        return roomnumber ;
-    }
-    public void  setroomnumber(int roomnumber){
-        this.roomnumber=roomnumber;
+   
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public double getprice(){
-        return price ;
-    }
-    public void  setprice(double price){
-        if (price>0)
-        this.price=price;
-        
-    }
-    
-
-    public boolean getisavailable(){
-        return isavailable ;
-    }
-    public void  setisavailable(boolean isavailable){
-        this.isavailable=isavailable;
+    public void setAvailable(boolean available) {
+        this.isAvailable = available;
     }
 
-    public void checkavailability (boolean isavailable)
-    { if (this.isavailable==true)
-        System.out.println("is available");
-
-    else
-        System.out.println("is not available");
-
-
+    public void checkAvailability() {
+        if (this.isAvailable) {
+            System.out.println("Room is available");
+        } else {
+            System.out.println("Room is not available");
+        }
     }
+
+   
     public ArrayList<Amenity> getAmenities() {
-        return this.amenities;
+        return new ArrayList<>(amenities); // return copy (encapsulation)
     }
+
     public void addAmenity(Amenity amenity) {
+        if (amenity == null) {
+            throw new IllegalArgumentException("Amenity cannot be null");
+        }
+
+        if (amenities.contains(amenity)) {
+            throw new IllegalArgumentException("Amenity already exists");
+        }
+
+        if (amenities.size() >= 20) {
+            throw new IllegalStateException("Maximum number of amenities reached");
+        }
+
         amenities.add(amenity);
-        System.out.println(amenity + " added successfully!");
+        System.out.println("Amenity added successfully!");
     }
+
     public void removeAmenity(Amenity amenity) {
+        if (amenity == null) {
+            throw new IllegalArgumentException("Amenity cannot be null");
+        }
+
+        if (!amenities.contains(amenity)) {
+            throw new IllegalArgumentException("Amenity not found");
+        }
+
         amenities.remove(amenity);
-        System.out.println(amenity + " removed successfully!");
+        System.out.println("Amenity removed successfully!");
+    }
+
+    
+    public void validateRoom() {
+        if (type == null) {
+            throw new IllegalStateException("Room type is not set");
+        }
+
+        if (price < type.getBasePrice()) {
+            throw new IllegalStateException("Invalid price: less than base price");
+        }
+
+        if (amenities.isEmpty()) {
+            System.out.println("Warning: Room has no amenities");
+        }
+    }
+
+   
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomNumber=" + roomNumber +
+                ", type=" + type +
+                ", price=" + price +
+                ", available=" + isAvailable +
+                ", amenities=" + amenities.size() +
+                '}';
     }
 }
