@@ -1,19 +1,28 @@
 public class Amenity {
-    private String amenity;
+    private String name;
+    private double price; // price per item
 
-    public Amenity(String amenity) {
-        this.amenity = amenity;
+    public Amenity(String name, double price) {
+        this.name = name;
+        this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return amenity; // أو return "Amenity Name: " + name;
+    public String getName() {
+        return name;
     }
 
-    public void setamenity( String amenity) {
-        this.amenity=amenity;
+    public double getPrice() {
+        return price;
     }
-    public String getAmenity() {
-        return this.amenity;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+        this.price = price;
     }
 }
