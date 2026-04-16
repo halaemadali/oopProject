@@ -75,69 +75,6 @@ public class Admin extends Staff {
 
     }
 
-    //Add Room Type
-    public void addRoomType(int roomTypeId, RoomCategory roomcategory, int capacity, double basePrice) {
-
-        RoomType type = new RoomType(roomTypeId, roomcategory, capacity, basePrice);
-
-        HotelDatabase.roomTypes.add(type);
-
-        System.out.println("RoomType " + roomcategory + " added successfully!");
-    }
-
-
-    //view Room Type
-    public void viewRoomType(RoomType type) {
-
-
-        System.out.println("\n===== ROOM TYPE =====");
-
-        System.out.println("Type: " + type.getRoomCategory());
-        System.out.println("Capacity: " + type.getCapacity());
-        System.out.println("Base Price: " + type.getBasePrice());
-
-        System.out.println("=====================\n");
-    }
-
-
-    // view all room types
-    public void viewAllRoomTypes() {
-
-        if (HotelDatabase.roomTypes.isEmpty()) {
-            System.out.println("No Room Types found");
-            return;
-        }
-
-        System.out.println("\n===== ALL ROOM TYPES =====");
-
-        for (RoomType t : HotelDatabase.roomTypes) {
-
-            System.out.println("Type: " + t.getRoomCategory());
-            System.out.println("Capacity: " + t.getCapacity());
-            System.out.println("Base Price: " + t.getBasePrice());
-            System.out.println("----------------------");
-        }
-    }
-
-
-    // Update room type
-    public void updateRoomType(RoomType type, int newCapacity, double newBasePrice, RoomCategory newRoomcategory) {
-
-        for (RoomType t : HotelDatabase.roomTypes) {
-
-            if (t.equals(type)) {
-
-                t.setCapacity(newCapacity);
-                t.setBasePrice(newBasePrice);
-                t.setRoomCategory(newRoomcategory);
-
-                System.out.println("RoomType updated successfully");
-                return;
-            }
-        }
-
-        System.out.println("RoomType not found");
-    }
 
 
     //Add Amenity
@@ -158,12 +95,24 @@ public class Admin extends Staff {
         System.out.println("\n========= ALL AMENITIES =========");
 
         for (Amenity a : HotelDatabase.amenities) {
-            System.out.println(a.getName());
+            System.out.println(a.getName() + "\t price: "+a.getPrice());
 
         }
         System.out.println("======================================= \n");
     }
 
+
+    //Update Amenity
+    public void updateAmenity(String Amenity , double newPrice) {
+        for (Amenity a : HotelDatabase.amenities) {
+            if (a.getName ().equalsIgnoreCase(Amenity)) {
+                a.setPrice(newPrice);
+                System.out.println("Amenity price updated successfully");
+                return;
+            }
+        }
+        System.out.println("Amenity not found");
+    }
 
 
     //Delete Amenity
@@ -171,7 +120,7 @@ public class Admin extends Staff {
         for (int i = 0; i < HotelDatabase.amenities.size(); i++) {
             if (HotelDatabase.amenities.get(i).getName().equalsIgnoreCase(name)) {
                 HotelDatabase.amenities.remove(i);
-                System.out.println("Amenity deleted");
+                System.out.println("Amenity deleted successfully");
                 return;
             }
         }
@@ -191,12 +140,12 @@ public class Admin extends Staff {
                     return;
                 }
 
-                System.out.println("Amenities in Room " + roomNumber + ":");
+                System.out.println(" \n Amenities in Room " + roomNumber + ":");
 
                 for (Amenity a : r.getAmenities()) {
                     System.out.println("- " + a.getQuantity() + "\t"+ a.getName() + "\tprice: " + a.getTotalPrice() );
                 }
-
+                 System.out.println("\n");
                 return;
             }
         }
@@ -204,6 +153,33 @@ public class Admin extends Staff {
         System.out.println("Room not found");
 
     }
+
+
+
+    //update amenity in room
+    public void updateAmenityInRoom(int roomNumber, String amenity, int newQuantity) {
+        for (Room r : HotelDatabase.rooms) {
+            if (r.getRoomNumber() == roomNumber) {
+
+                for (Amenity a : r.getAmenities()) {
+                    if (a.getName().equalsIgnoreCase(amenity)) {
+
+                        a.setQuantity(newQuantity);
+
+                        System.out.println("Amenity quantity updated in room");
+                        return;
+                    }
+                }
+
+                System.out.println("Amenity not found in room");
+                return;
+            }
+        }
+
+        System.out.println("Room not found");
+    }
+
+
 
 
     //Remove amenity from room
@@ -248,8 +224,8 @@ public class Admin extends Staff {
                 // check duplicate
                 for (Amenity a : r.getAmenities()) {
                     if (a.getName().equalsIgnoreCase(name)) {
-                        quantity++;
-                        System.out.println( quantity + name + " added successfully in room " + roomNumber);
+                        a.setQuantity(a.getQuantity() + quantity);
+                        System.out.println( quantity + " " + name + " added successfully in room " + roomNumber);
                         return;
                     }
                 }
