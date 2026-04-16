@@ -125,11 +125,20 @@ public abstract class Staff {
             System.out.println("Available: " + r.isAvailable());
 
             // RoomType details
-            System.out.println("NO3: " + r.getType().getRoomCategory());
-            System.out.println("Capacity: " + r.getType().getCapacity());
-            System.out.println("Base Price: " + r.getType().getBasePrice());
-            System.out.println("Amenities: " + r.getAmenities());
-         
+            System.out.println("Room Type Id: "+ r.getType().getRoomTypeId());
+            System.out.println("\t\tRoom Category: " + r.getType().getRoomCategory());
+            System.out.println("\t\tCapacity: " + r.getType().getCapacity());
+            System.out.println("\t\tBase Price: " + r.getType().getBasePrice());
+
+            System.out.println("Amenities:");
+            if (r.getAmenities() != null && !r.getAmenities().isEmpty()) {
+                for (Amenity a : r.getAmenities()) {
+                    System.out.println("- " +a.getQuantity()+" "+ a.getName() + "  Price: " + a.getTotalPrice());
+                }
+            } else {
+                System.out.println("No amenities available");
+            }
+
 
             System.out.println("---------------------------------------");
 
@@ -162,6 +171,30 @@ public abstract class Staff {
             }
         }
 
+
+
+        //view reservation
+    public void viewReservation(int reservationId) {
+
+
+        for (Reservation r : HotelDatabase.reservations) {
+
+            if (r.getID() == reservationId) {
+
+                System.out.println("\nReservation ID: " + r.getID());
+                System.out.println("Guest username: " + r.getGuest().getUsername());
+                System.out.println("Room Number: " + r.getRoom().getRoomNumber());
+                System.out.println("Checkin: " + r.getCheckin());
+                System.out.println("Checkout: " + r.getCheckout());
+                System.out.println("Status: " + r.getStatus());
+                System.out.println("Duration : " + r.getDuration() + "\n");
+
+                return;
+            }
+
+            System.out.println("Reservation not found");
+        }
+    }
 
 
 
