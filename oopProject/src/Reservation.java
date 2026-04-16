@@ -39,7 +39,7 @@ public class Reservation {
     }
 
     public void setRoom(Room room) throws Exception {
-        if (room.getisavailable()== false)
+        if (room.isAvailable()== false)
             throw new RoomNotAvailableException("Room is already booked.");
         this.room = room;
     }
@@ -85,9 +85,13 @@ public class Reservation {
     public void setStatus(ReservationStatus status) {
         this.status = status;
         if (this.status == ReservationStatus.CONFIRMED)
-            this.room.setisavailable(false);
+            this.room.setAvailable(false);
         if(this.status == ReservationStatus.CANCELLED || this.status == ReservationStatus.COMPLETED )
-            this.room.setisavailable(true);
+            this.room.setAvailable(true);
+    }
+
+    public Invoice getInvoice(){
+        return this.invoice;
     }
 
     //methods
@@ -139,5 +143,38 @@ public class Reservation {
             throw new IllegalStateException("An invoice is already created for this reservation.");
         invoice = new Invoice(this);
     }
+    @Override
+    public String toString() {
+
+        String checkInStr = (checkin != null)
+                ? new java.text.SimpleDateFormat("dd/MM/yyyy").format(checkin)
+                : "null";
+
+        String checkOutStr = (checkout != null)
+                ? new java.text.SimpleDateFormat("dd/MM/yyyy").format(checkout)
+                : "null";
+
+        return "Reservation ID: " + ID +
+                ", Guest: " + (guest != null ? guest.getUsername() : "null") +
+                ", Room: " + (room != null ? room.getRoomNumber() : "null") +
+                ", Check-in: " + checkInStr +
+                ", Check-out: " + checkOutStr +
+                ", Status: " + (status != null ? status : "null");
+
+    }
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) return true;
+
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Reservation other = (Reservation) obj;
+
+        return this.ID == other.ID;
+    }
+
+
+
 
 }
