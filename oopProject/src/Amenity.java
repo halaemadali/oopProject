@@ -42,4 +42,9 @@ public class Amenity {
     public double getTotalPrice() {
         return price * quantity;
     }
+    @Override
+    public String toString(){
+        return getName();
+    }
+
 }
