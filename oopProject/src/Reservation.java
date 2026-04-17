@@ -39,7 +39,7 @@ public class Reservation {
     }
 
     public void setRoom(Room room) throws Exception {
-        if (room.isAvailable()== false)
+        if (room.getisavailable()== false)
             throw new RoomNotAvailableException("Room is already booked.");
         this.room = room;
     }
