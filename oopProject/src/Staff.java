@@ -21,6 +21,10 @@ public abstract class Staff {
 
     }
 
+    public Staff() {
+
+    }
+
 
     //Getters
     public String getUsername() {
@@ -97,13 +101,13 @@ public abstract class Staff {
 
 
 
- public void viewAllGuests(){
+    public void viewAllGuests(){
 
-     if (HotelDatabase.guests.isEmpty()) {
-         System.out.println("No guests found");
-         return;
-     }
-     System.out.println("============== View All Guests ============");
+        if (HotelDatabase.guests.isEmpty()) {
+            System.out.println("No guests found");
+            return;
+        }
+        System.out.println("============== View All Guests ============");
         for(Guest g : HotelDatabase.guests) {
 
             System.out.println("Username: " + g.getUsername());
@@ -122,13 +126,13 @@ public abstract class Staff {
 
             System.out.println("Room Number: " + r.getRoomNumber());
             System.out.println("Price: " + r.getPrice());
-            System.out.println("Available: " + r.isAvailable());
+            System.out.println("Available: " + r.getisavailable());
 
             // RoomType details
-            System.out.println("Room Type Id: "+ r.getType().getRoomTypeId());
+            System.out.println("Room Type Id: "+ r.getType().getroomTypeId());
             System.out.println("\t\tRoom Category: " + r.getType().getRoomCategory());
             System.out.println("\t\tCapacity: " + r.getType().getCapacity());
-            System.out.println("\t\tBase Price: " + r.getType().getBasePrice());
+            System.out.println("\t\tBase Price: " + r.getType().getRoomCategory().getBasePrice());
 
             System.out.println("Amenities:");
             if (r.getAmenities() != null && !r.getAmenities().isEmpty()) {
@@ -146,34 +150,34 @@ public abstract class Staff {
     }
 
     // Prints all reservations in the system
-        public void viewAllReservations() {
+    public void viewAllReservations() {
 
-            if (HotelDatabase.reservations.isEmpty()) {
-                System.out.println("No reservations found");
-                return;
-            }
-
-            System.out.println("=========== View All Reservations ===========");
-
-            for (Reservation r : HotelDatabase.reservations) {
-
-                System.out.println("Reservation ID: " + r.getID());
-                System.out.println("Guest username: " +r.getGuest().getUsername() );
-                System.out.println("Room Number: " + r.getRoom().getRoomNumber());
-                System.out.println("Checkin: " + r.getCheckin());
-                System.out.println("Checkout: " + r.getCheckout());
-                System.out.println("Status: " + r.getStatus());
-                System.out.println("Duration : " + r.getDuration());
-
-                System.out.println("-------------------------------------------");
-
-
-            }
+        if (HotelDatabase.reservations.isEmpty()) {
+            System.out.println("No reservations found");
+            return;
         }
 
+        System.out.println("=========== View All Reservations ===========");
+
+        for (Reservation r : HotelDatabase.reservations) {
+
+            System.out.println("Reservation ID: " + r.getID());
+            System.out.println("Guest username: " +r.getGuest().getUsername() );
+            System.out.println("Room Number: " + r.getRoom().getRoomNumber());
+            System.out.println("Checkin: " + r.getCheckin());
+            System.out.println("Checkout: " + r.getCheckout());
+            System.out.println("Status: " + r.getStatus());
+            System.out.println("Duration : " + r.getDuration());
+
+            System.out.println("-------------------------------------------");
 
 
-        //view reservation
+        }
+    }
+
+
+
+    //view reservation
     public void viewReservation(int reservationId) {
 
 
