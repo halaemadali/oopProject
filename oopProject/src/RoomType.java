@@ -2,22 +2,17 @@
 public class RoomType {
     private RoomCategory roomcategory;    //single,double,suite
     private int capacity;
-    private double BasePrice;
     private int roomTypeId;
-    private static int numofroomtypes =0;
 
-    public RoomType (RoomCategory roomcategory ,int capacity,double price ){
-        numofroomtypes ++;
+    public RoomType (RoomCategory roomcategory ,int capacity,int roomTypeId ){
         this. roomcategory= roomcategory;
         this.capacity=capacity;
-        this.BasePrice = price;
-        this.roomTypeId= numofroomtypes;
+
+        this.roomTypeId=roomTypeId;
     }
     public RoomType(){
         this. roomcategory= RoomCategory.SINGLE;
         this.capacity=1;
-        numofroomtypes ++;
-        this.roomTypeId = numofroomtypes;
 
     }
 
@@ -61,8 +56,5 @@ public class RoomType {
     }
     public int getroomTypeId(){
         return roomTypeId;
-    }
-    public void setBasePrice(double p){
-        this.BasePrice =p;
     }
 }
