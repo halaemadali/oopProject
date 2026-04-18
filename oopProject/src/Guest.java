@@ -201,13 +201,40 @@ public class Guest {
     }
 
     //checkout
-    public void checkout() {
+    public void checkOut(int roomnumber, PaymentMethod method) throws InvalidPaymentException {
 
-        for (Reservation r : reservations) {
-            r.complete();
+        for (Reservation r : HotelDatabase.reservations) {
+
+            if (r.getRoom().getRoomNumber() == roomnumber) {
+
+                if (r.getStatus() == ReservationStatus.COMPLETED) {
+                    System.out.println("Already Checked out.");
+                    return;
+                }
+
+                if (r.getInvoice() == null) {
+                    throw new IllegalStateException("No invoice found.");
+                }
+
+                double total = r.getInvoice().calculateTotal();
+                System.out.println("Guest must pay " + total);
+
+                if (r.getGuest().getBalance() < total) {
+                    throw new InvalidPaymentException("Guest Balance is insufficient.");
+                }
+
+                // Deduct balance first
+                r.getGuest().setBalance(r.getGuest().getBalance() - total);
+
+                // Then mark invoice as paid
+                r.getInvoice().pay(method);
+
+                System.out.println("Payment Successful. Awaiting Receptionist Approval");
+
+                return;
+            }
         }
     }
-
 }
 
 

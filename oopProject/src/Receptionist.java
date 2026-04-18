@@ -8,11 +8,13 @@ public class Receptionist extends Staff {
     }
 
     public void viewReservations(int reservationId) {
+        boolean found =false;
 
 
         for (Reservation r : HotelDatabase.reservations) {
 
             if (r.getID() == reservationId) {
+                found =true;
 
                 System.out.println("\nReservation ID: " + r.getID());
                 System.out.println("Guest username: " + r.getGuest().getUsername());
@@ -25,59 +27,15 @@ public class Receptionist extends Staff {
                 return;
             }
 
-            System.out.println("Reservation not found");
+
         }
-    }
-
-
-        public void confirmReservation(int reservationId){
-
-            for (Reservation r : HotelDatabase.reservations) {
-
-                if (r.getID() == reservationId) {
-
-                    if (r.getStatus() != ReservationStatus.PENDING) {
-                        System.out.println("Only PENDING reservations can be confirmed");
-                        return;
-                    } else if (r.getStatus() == ReservationStatus.CONFIRMED) {
-                        System.out.println("Already confirmed");
-                        return;
-                    }
-
-
-                    r.confirm();
-                    System.out.println("Reservation CONFIRMED");
-                    return;
-                }
-            }
-            System.out.println("Reservation not found");
-        }
-
-
-
-
-    public void cancelReservation(int reservationId) {
-
-        for (Reservation r : HotelDatabase.reservations) {
-
-            if (r.getID() == reservationId) {
-
-                if (r.getStatus() == ReservationStatus.COMPLETED) {
-                    System.out.println("Cannot cancel completed reservation");
-                    return;
-                }
-
-                r.cancel();
-                System.out.println("Reservation CANCELLED");
-                return;
-            }
-        }
-        System.out.println("Reservation not found");
+        if (!found) System.out.println("Reservation not found");
     }
 
 
 
-    public void completeReservation(int reservationId) {
+
+    /*public void completeReservation(int reservationId) {
 
         for (Reservation r : HotelDatabase.reservations) {
 
@@ -100,15 +58,15 @@ public class Receptionist extends Staff {
         }
 
         System.out.println("Reservation not found");
-    }
+    }*/
 
 
 
 
-    public void checkIn(int reservationID ){
+    public void checkIn(int roomnumber ){
         for (Reservation r : HotelDatabase.reservations) {
 
-            if (r.getID() == reservationID) {
+            if (r.getRoom().getRoomNumber() == roomnumber) {
 
                 if (r.getStatus() != ReservationStatus.CONFIRMED) {
                     System.out.println(" Reservation not confirmed yet");
@@ -126,32 +84,42 @@ public class Receptionist extends Staff {
     }
 
 
-    public void checkOut(int reservationID){
+    public void checkoutGuest(int roomNumber) {
+
         for (Reservation r : HotelDatabase.reservations) {
 
-            if (r.getID() == reservationID) {
+            if (r.getRoom().getRoomNumber() == roomNumber) {
 
-                if (r.getStatus() != ReservationStatus.COMPLETED) {
-                    System.out.println("Reservation not completed yet");
+                // Already checked out
+                if (r.getStatus() == ReservationStatus.COMPLETED) {
+                    System.out.println("Guest already checked out.");
                     return;
                 }
 
+                // Make sure reservation is active
+                if (r.getStatus() == ReservationStatus.CANCELLED) {
+                    System.out.println("Reservation is cancelled.");
+                    return;
+                }
+
+                // Check payment
+                if (r.getInvoice() == null || !r.getInvoice().getPaid()) {
+                    System.out.println("Payment not completed yet.");
+                    return;
+                }
+
+                // Finalize checkout
+                r.setStatus(ReservationStatus.COMPLETED);
                 r.getRoom().setAvailable(true);
 
-                System.out.println("Guest checked out");
+                System.out.println("Checkout confirmed. Room is now available.");
+
                 return;
             }
         }
 
-        System.out.println("Reservation not found");
+        System.out.println("No reservation found for this room.");
     }
-
-
-
-
-
-
-
 
 
 

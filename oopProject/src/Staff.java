@@ -3,11 +3,11 @@ import java.time.LocalDate;
 
 public abstract class Staff {
 
-    private String username;
-    private String password;
-    private LocalDate dateOfBirth;
-    private Role role;  //ADMIN or RECEPTIONIST
-    private int workingHours;
+    protected String username;
+    protected String password;
+    protected LocalDate dateOfBirth;
+    protected Role role;  //ADMIN or RECEPTIONIST
+    protected int workingHours;
 
 
     //Constructor
@@ -200,6 +200,66 @@ public abstract class Staff {
         }
     }
 
+    public void viewallPendingReservations(){
+        boolean pending = false;
+        if (HotelDatabase.reservations.isEmpty()) {
+            System.out.println("No reservations found");
+            return;
+        }
+
+        System.out.println("=========== View Pending Reservations ===========");
+
+        for (Reservation r : HotelDatabase.reservations) {
+            if (r.getStatus() == ReservationStatus.PENDING){
+                pending = true;
+                System.out.print(r.toString());
+                System.out.println("");
+            }
+        }
+        if (!pending){
+            System.out.println("No PENDING reservations.");
+        }
+    }
+
+    public void confirmReservation(int reservationId){
+
+        for (Reservation r : HotelDatabase.reservations) {
+
+            if (r.getID() == reservationId) {
+
+                if (r.getStatus() != ReservationStatus.PENDING) {
+                    System.out.println("Only PENDING reservations can be confirmed");
+                    return;
+                } else if (r.getStatus() == ReservationStatus.CONFIRMED) {
+                    System.out.println("Already confirmed");
+                    return;
+                }
 
 
+                r.confirm();
+                System.out.println("Reservation CONFIRMED");
+                return;
+            }
+        }
+        System.out.println("Reservation not found");
+    }
+
+    public void cancelReservation(int reservationId) {
+
+        for (Reservation r : HotelDatabase.reservations) {
+
+            if (r.getID() == reservationId) {
+
+                if (r.getStatus() == ReservationStatus.COMPLETED) {
+                    System.out.println("Cannot cancel completed reservation");
+                    return;
+                }
+
+                r.cancel();
+                System.out.println("Reservation CANCELLED");
+                return;
+            }
+        }
+        System.out.println("Reservation not found");
+    }
 }

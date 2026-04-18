@@ -152,7 +152,7 @@ public Admin(){
 
         for (RoomType t : HotelDatabase.roomTypes) {
 
-            if (t.getRoomTypeId()== roomTypeId) {
+            if (t.getroomTypeId()== roomTypeId) {
 
                 t.setRoomCategory(newRoomcategory);
                 t.setCapacity(newCapacity);

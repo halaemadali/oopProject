@@ -13,16 +13,17 @@ public class Reservation {
     // constructors
     public Reservation(){
         numofreservations ++;
+        this.status = ReservationStatus.PENDING;
 
     }
-    public Reservation( Room r, Guest g, Date in, Date out, ReservationStatus status) throws Exception{
+    public Reservation( Room r, Guest g, Date in, Date out) throws Exception{
         this.ID = numofreservations ;
         setRoom(r);
         this.guest =g;
         setCheckin(in);
         setCheckout(out);
         validateRange(in, out);
-        setStatus(status);
+        setStatus(ReservationStatus.PENDING);
         // automatic or not?
         generateInvoice();
         numofreservations++;
@@ -30,7 +31,7 @@ public class Reservation {
     }
 
     //setters and getters
-    public void setID(int ID) {
+    private void setID(int ID) {
         this.ID = ID;
     }
 
