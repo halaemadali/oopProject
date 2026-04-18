@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Room {
     private int roomNumber;
     private RoomType type;
-    private ArrayList<Amenity> amenities = new ArrayList<>();
     private boolean isAvailable;
     private double price;
 
@@ -21,8 +20,11 @@ public class Room {
         setRoomNumber(roomNumber);
         setType(type);
         setAvailable(isAvailable);
-        setPrice(price);
+       // setPrice(price);
     }
+
+    private ArrayList<RoomAmenity> roomAmenities = new ArrayList<>();
+
 
 
     public RoomType getType() {
@@ -35,10 +37,6 @@ public class Room {
         }
         this.type = type;
 
-
-        if (this.price != 0 && this.price < RoomCategory.getBasePrice()) {
-            throw new IllegalArgumentException("Price cannot be less than base price of room type");
-        }
     }
 
 
@@ -76,13 +74,22 @@ public class Room {
             throw new IllegalArgumentException("Price exceeds maximum allowed");
         }
 
-        if (type != null && price < RoomCategory.getBasePrice()) {
+        if (type != null && price < type.getBasePrice()) {
             throw new IllegalArgumentException("Price cannot be less than base price of room type");
         }
 
         this.price = price;
     }
 
+public double calculateRoomPrice(){
+    double  amenitiesTOT= 0;
+        for (int i=0;i<roomAmenities.size();i++){
+            amenitiesTOT+=roomAmenities.get(i).getPrice();
+
+        }
+       double total= this.type.getBasePrice()+amenitiesTOT;
+        return total;
+}
 
     public boolean getisavailable() {
         return isAvailable;
@@ -102,36 +109,37 @@ public class Room {
 
 
     public ArrayList<Amenity> getAmenities() {
-        return new ArrayList<>(amenities); // return copy (encapsulation)
+        return new ArrayList<>(roomAmenities); // return copy (encapsulation)
     }
 
-    public void addAmenity(Amenity amenity) {
+
+public void addAmenity(RoomAmenity amenity) {
+    if (amenity == null) {
+        throw new IllegalArgumentException("Amenity cannot be null");
+    }
+
+    if (roomAmenities.contains(amenity)) {
+        throw new IllegalArgumentException("Amenity already exists");
+    }
+
+    if (roomAmenities.size() >= 20) {
+        throw new IllegalStateException("Maximum number of amenities reached");
+    }
+
+    roomAmenities.add( amenity);
+    System.out.println("Amenity added successfully!");
+}
+
+    public void removeAmenity(RoomAmenity amenity) {
         if (amenity == null) {
             throw new IllegalArgumentException("Amenity cannot be null");
         }
 
-        if (amenities.contains(amenity)) {
-            throw new IllegalArgumentException("Amenity already exists");
-        }
-
-        if (amenities.size() >= 20) {
-            throw new IllegalStateException("Maximum number of amenities reached");
-        }
-
-        amenities.add(amenity);
-        System.out.println("Amenity added successfully!");
-    }
-
-    public void removeAmenity(Amenity amenity) {
-        if (amenity == null) {
-            throw new IllegalArgumentException("Amenity cannot be null");
-        }
-
-        if (!amenities.contains(amenity)) {
+        if (!roomAmenities.contains(amenity)) {
             throw new IllegalArgumentException("Amenity not found");
         }
 
-        amenities.remove(amenity);
+        roomAmenities.remove(amenity);
         System.out.println("Amenity removed successfully!");
     }
 
@@ -141,11 +149,11 @@ public class Room {
             throw new IllegalStateException("Room type is not set");
         }
 
-        if (price < RoomCategory.getBasePrice()) {
+        if (price < type.getBasePrice()) {
             throw new IllegalStateException("Invalid price: less than base price");
         }
 
-        if (amenities.isEmpty()) {
+        if (roomAmenities.isEmpty()) {
             System.out.println("Warning: Room has no amenities");
         }
     }
@@ -158,7 +166,7 @@ public class Room {
                 ", type=" + type +
                 ", price=" + price +
                 ", available=" + isAvailable +
-                ", amenities=" + amenities.size() +
+                ", amenities=" + roomAmenities.size() +
                 '}';
     }
 }
