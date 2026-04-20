@@ -181,6 +181,36 @@ public class Guest {
     }
 
 
+public void chooseAmenities(Room room, Scanner input) {
+
+    System.out.println("Available amenities:");
+
+    for (int i = 0; i < HotelDatabase.amenities.size(); i++) {
+        System.out.println(i + ": " + HotelDatabase.amenities.get(i));
+    }
+
+    System.out.println("How many amenities do you want to add?");
+    int count = input.nextInt();
+
+    for (int i = 0; i < count; i++) {
+
+        System.out.println("Enter index:");
+        int choice = input.nextInt();
+
+       
+        if (choice >= 0 && choice < HotelDatabase.amenities.size()) {
+            Amenity a = HotelDatabase.amenities.get(choice);
+            room.addAmenity(a);
+        } else {
+            System.out.println("Invalid index!");
+            i--; 
+        }
+    }
+}
+
+
+
+    
     //cancle reservation
     public void cancelReservation(Reservation r) {
 
