@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Room {
     private int roomNumber;
@@ -16,6 +17,7 @@ public class Room {
 
     // Default constructor
     public Room() {
+        HotelDatabase.rooms.add(this);
     }
 
     // Constructor with validation error
@@ -26,6 +28,7 @@ public class Room {
         this.price = calculateRoomPrice();
         setFloor(f);
         setView(v);
+        HotelDatabase.rooms.add(this);
     }
 
 
@@ -129,6 +132,27 @@ public class Room {
             System.out.println("Room is not available");
         }
     }
+
+    public boolean checkavailabiltyPeriod(Date start, Date end) {
+
+        for (Reservation r : HotelDatabase.reservations) {
+
+            if (r.getRoom().equals(this)) {
+
+
+                if (r.getStatus() != ReservationStatus.CANCELLED &&
+                        r.getStatus() != ReservationStatus.COMPLETED) {
+
+                    if (!(end.before(r.getCheckin()) || start.after(r.getCheckout()))) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
 
 
     public ArrayList<Amenity> getAmenities() {

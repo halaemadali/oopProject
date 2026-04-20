@@ -11,6 +11,7 @@ public class RoomType {
     public RoomType(){
         numofroomtypes ++;
         this.roomTypeId = numofroomtypes;
+        HotelDatabase.roomTypes.add(this);
     }
 
     public RoomType(String type, int capacity, double price){
@@ -19,6 +20,7 @@ public class RoomType {
         setCategory(type);
         setCapacity(capacity);
         setBasePrice(price);
+        HotelDatabase.roomTypes.add(this);
 
     }
 

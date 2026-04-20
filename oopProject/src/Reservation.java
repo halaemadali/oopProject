@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Reservation {
     private int ID;
@@ -9,24 +11,34 @@ public class Reservation {
     private ReservationStatus status;
     private Invoice invoice;
     private static int numofreservations = 0;
+    private List<Amenity> required_amenities = new ArrayList<>();
+
 
     // constructors
     public Reservation(){
         numofreservations ++;
+        this.ID = numofreservations;
         this.status = ReservationStatus.PENDING;
+        HotelDatabase.reservations.add(this);
 
     }
-    public Reservation( Room r, Guest g, Date in, Date out) throws Exception{
-        this.ID = numofreservations ;
-        setRoom(r);
-        this.guest =g;
+    public Reservation(Room r, Guest g, Date in, Date out) throws Exception {
+        numofreservations++;
+        this.ID = numofreservations;
+
+        this.guest = g;
+
         setCheckin(in);
         setCheckout(out);
+
         validateRange(in, out);
+
+        setRoom(r, in, out);
+
         setStatus(ReservationStatus.PENDING);
-        // automatic or not?
+
         generateInvoice();
-        numofreservations++;
+        HotelDatabase.reservations.add(this);
 
     }
 
@@ -39,9 +51,14 @@ public class Reservation {
         this.guest = guest;
     }
 
+    public void setRoom(Room room, Date in, Date out) throws RoomNotAvailableException {
+        if (!room.checkavailabiltyPeriod(in, out))
+            throw new RoomNotAvailableException("Room is booked during this period.");
+        this.room = room;
+    }
     public void setRoom(Room room) throws Exception {
-        if (room.getisavailable()== false)
-            throw new RoomNotAvailableException("Room is already booked.");
+        if (!room.checkavailabiltyPeriod(this.checkin, this.checkout))
+            throw new RoomNotAvailableException("Room is booked during this period.");
         this.room = room;
     }
 
@@ -85,14 +102,18 @@ public class Reservation {
 
     public void setStatus(ReservationStatus status) {
         this.status = status;
-        if (this.status == ReservationStatus.CONFIRMED)
-            this.room.setAvailable(false);
-        if(this.status == ReservationStatus.CANCELLED || this.status == ReservationStatus.COMPLETED )
-            this.room.setAvailable(true);
     }
 
     public Invoice getInvoice(){
         return this.invoice;
+    }
+
+    public List<Amenity> getRequired_amenities() {
+        return required_amenities;
+    }
+
+    public void setRequired_amenities(List<Amenity> required_amenities) {
+        this.required_amenities = required_amenities;
     }
 
     //methods

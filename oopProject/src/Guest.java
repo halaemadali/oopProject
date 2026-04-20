@@ -28,6 +28,7 @@ public class Guest {
     public Guest() {
         this.availableRooms = new ArrayList<>();
         this.reservations = new ArrayList<>();
+        HotelDatabase.guests.add(this);
     }
 
 
@@ -44,6 +45,7 @@ public class Guest {
         this.roomPreferences = roomPreferences != null ? roomPreferences : new ArrayList<>();
         this.reservations = new ArrayList<>();
         this.availableRooms = new ArrayList<>();
+        HotelDatabase.guests.add(this);
     }
 
 
@@ -215,33 +217,6 @@ public class Guest {
     }
 
 
-public void chooseAmenities(Room room, Scanner input) {
-
-    System.out.println("Available amenities:");
-
-    for (int i = 0; i < HotelDatabase.amenities.size(); i++) {
-        System.out.println(i + ": " + HotelDatabase.amenities.get(i));
-    }
-
-    System.out.println("How many amenities do you want to add?");
-    int count = input.nextInt();
-
-    for (int i = 0; i < count; i++) {
-
-        System.out.println("Enter index:");
-        int choice = input.nextInt();
-
-       
-        if (choice >= 0 && choice < HotelDatabase.amenities.size()) {
-            Amenity a = HotelDatabase.amenities.get(choice);
-            room.addAmenity(a);
-        } else {
-            System.out.println("Invalid index!");
-            i--; 
-        }
-    }
-}
-
 
 
     
@@ -287,10 +262,10 @@ public void chooseAmenities(Room room, Scanner input) {
                     throw new InvalidPaymentException("Guest Balance is insufficient.");
                 }
 
-                // Deduct balance first
+
                 r.getGuest().setBalance(r.getGuest().getBalance() - total);
 
-                // Then mark invoice as paid
+
                 r.getInvoice().pay(method);
 
                 System.out.println("Payment Successful. Awaiting Receptionist Approval");

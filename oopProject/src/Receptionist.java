@@ -5,6 +5,7 @@ public class Receptionist extends Staff {
     public Receptionist(String username, String password, LocalDate dateOfBirth, int workingHours) {
 
         super(username, password, dateOfBirth, Role.RECEPTIONIST, workingHours);
+        HotelDatabase.receptionists.add(this);
     }
 
     public void viewReservations(int reservationId) {
@@ -74,6 +75,9 @@ public class Receptionist extends Staff {
                 }
 
                 r.getRoom().setAvailable(false);
+                for (int i=0; i<r.getRequired_amenities().size(); i++){
+                    r.getRoom().addAmenity(r.getRequired_amenities().get(i));
+                }
 
                 System.out.println("Guest checked in");
                 return;
@@ -111,6 +115,7 @@ public class Receptionist extends Staff {
                 // Finalize checkout
                 r.setStatus(ReservationStatus.COMPLETED);
                 r.getRoom().setAvailable(true);
+                r.getRoom().getAmenities().clear();
 
                 System.out.println("Checkout confirmed. Room is now available.");
 

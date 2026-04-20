@@ -5,6 +5,7 @@ public class Amenity {
     public Amenity(String name, double price) {
         this.name = name;
         this.price = price;
+        HotelDatabase.amenities.add(this);
 
     }
 
