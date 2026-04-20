@@ -6,6 +6,9 @@ public class Room {
     private RoomType type;
     private boolean isAvailable;
     private double price;
+    private View view;
+    private int floor;
+    private ArrayList<Amenity> Amenities = new ArrayList<>();
 
     // Constants
     private static final int MAXROOMNUMBER = 1000000;
@@ -16,14 +19,16 @@ public class Room {
     }
 
     // Constructor with validation error
-    public Room(int roomNumber, RoomType type, boolean isAvailable, double price) {
+    public Room(int roomNumber, RoomType type, boolean isAvailable, View v, int f) {
         setRoomNumber(roomNumber);
         setType(type);
         setAvailable(isAvailable);
-       // setPrice(price);
+        this.price = calculateRoomPrice();
+        setFloor(f);
+        setView(v);
     }
 
-    private ArrayList<RoomAmenity> roomAmenities = new ArrayList<>();
+
 
 
 
@@ -81,10 +86,28 @@ public class Room {
         this.price = price;
     }
 
-public double calculateRoomPrice(){
+    public void setFloor(int floor) {
+        if (floor <0 || floor > 5)
+            throw new IllegalArgumentException("Floor can only be from 0 to 5");
+        this.floor = floor;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public int getFloor() {
+        return floor;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public double calculateRoomPrice(){
     double  amenitiesTOT= 0;
-        for (int i=0;i<roomAmenities.size();i++){
-            amenitiesTOT+=roomAmenities.get(i).getPrice();
+        for (int i=0;i<Amenities.size();i++){
+            amenitiesTOT+=Amenities.get(i).getPrice();
 
         }
        double total= this.type.getBasePrice()+amenitiesTOT;
@@ -109,37 +132,37 @@ public double calculateRoomPrice(){
 
 
     public ArrayList<Amenity> getAmenities() {
-        return new ArrayList<>(roomAmenities); // return copy (encapsulation)
+        return new ArrayList<>(Amenities); // return copy (encapsulation)
     }
 
 
-public void addAmenity(RoomAmenity amenity) {
+public void addAmenity(Amenity amenity) {
     if (amenity == null) {
         throw new IllegalArgumentException("Amenity cannot be null");
     }
 
-    if (roomAmenities.contains(amenity)) {
+    if (Amenities.contains(amenity)) {
         throw new IllegalArgumentException("Amenity already exists");
     }
 
-    if (roomAmenities.size() >= 20) {
+    if (Amenities.size() >= 20) {
         throw new IllegalStateException("Maximum number of amenities reached");
     }
 
-    roomAmenities.add( amenity);
+    Amenities.add( amenity);
     System.out.println("Amenity added successfully!");
 }
 
-    public void removeAmenity(RoomAmenity amenity) {
+    public void removeAmenity(Amenity amenity) {
         if (amenity == null) {
             throw new IllegalArgumentException("Amenity cannot be null");
         }
 
-        if (!roomAmenities.contains(amenity)) {
+        if (!Amenities.contains(amenity)) {
             throw new IllegalArgumentException("Amenity not found");
         }
 
-        roomAmenities.remove(amenity);
+        Amenities.remove(amenity);
         System.out.println("Amenity removed successfully!");
     }
 
@@ -153,7 +176,7 @@ public void addAmenity(RoomAmenity amenity) {
             throw new IllegalStateException("Invalid price: less than base price");
         }
 
-        if (roomAmenities.isEmpty()) {
+        if (Amenities.isEmpty()) {
             System.out.println("Warning: Room has no amenities");
         }
     }
@@ -166,7 +189,7 @@ public void addAmenity(RoomAmenity amenity) {
                 ", type=" + type +
                 ", price=" + price +
                 ", available=" + isAvailable +
-                ", amenities=" + roomAmenities.size() +
+                ", amenities=" + Amenities.size() +
                 '}';
     }
 }

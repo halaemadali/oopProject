@@ -84,6 +84,10 @@ public abstract class Staff {
         if (dateOfBirth == null) {
             throw new IllegalArgumentException("Invalid date of birth");
         }
+        LocalDate today = LocalDate.now();
+        if (dateOfBirth.isAfter(today)){
+            throw new IllegalArgumentException("Invalid Birthday.");
+        }
 
         this.dateOfBirth = dateOfBirth;
     }

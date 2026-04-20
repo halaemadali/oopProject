@@ -1,8 +1,11 @@
 
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class Guest {
@@ -96,6 +99,10 @@ public class Guest {
         if (dateOfBirth == null) {
             System.out.println("Date Of Birth is null");
         }
+        LocalDate today = LocalDate.now();
+        if (dateOfBirth.isAfter(today)){
+            throw new IllegalArgumentException("Invalid Birthday.");
+        }
         else{ this.dateOfBirth = dateOfBirth;}
     }
 
@@ -115,7 +122,7 @@ public class Guest {
         return reservations;
     }
 
-    //methodes
+    //methods
 
     //register
 
@@ -165,6 +172,33 @@ public class Guest {
 
         return availableRooms;
 
+    }
+
+    public void chooseAmenities(Room room, Scanner input) {
+
+        System.out.println("Available amenities:");
+
+        for (int i = 0; i < HotelDatabase.amenities.size(); i++) {
+            System.out.println(i + ": " + HotelDatabase.amenities.get(i));
+        }
+
+        System.out.println("How many amenities do you want to add?");
+        int count = input.nextInt();
+
+        for (int i = 0; i < count; i++) {
+
+            System.out.println("Enter index:");
+            int choice = input.nextInt();
+
+
+            if (choice >= 0 && choice < HotelDatabase.amenities.size()) {
+                Amenity a = HotelDatabase.amenities.get(choice);
+                room.addAmenity(a);
+            } else {
+                System.out.println("Invalid index!");
+                i--;
+            }
+        }
     }
 
     //make Reservation
@@ -235,6 +269,7 @@ public class Guest {
             }
         }
     }
+
 }
 
 
