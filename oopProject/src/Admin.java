@@ -9,10 +9,17 @@ public class Admin extends Staff {
 
     //add room
     public void addRoom(int roomNumber, RoomType type, boolean isAvailable, View view, int floor) {
+          
+        for (Room r :HotelDatabase.rooms) {
+            if (r.getRoomNumber() == roomNumber) {
+                throw new IllegalArgumentException("Room number already exists");
+            }
+        }
 
         Room room = new Room(roomNumber, type, isAvailable, view, floor);
-
-            System.out.println("Room added successfully: " + room);
+        
+              HotelDatabase.rooms.add(newRoom);
+            System.out.println("Room added successfully");
     }
 
 
