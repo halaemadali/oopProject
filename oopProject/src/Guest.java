@@ -166,7 +166,7 @@ public class Guest {
         availableRooms.clear();
         for (Room room : HotelDatabase.rooms) {
             if ((roomPreferences == null || roomPreferences.contains(room.getType()))
-                    && room.getisavailable()) {
+                    && room.isAvailable()) {
 
                 availableRooms.add(room);
             }
@@ -175,139 +175,137 @@ public class Guest {
         return availableRooms;
 
     }
-//chooseAmenities
+    //chooseAmenities
     public void chooseAmenities(Room room, Scanner input) {
 
-    System.out.println("Available amenities:");
+        System.out.println("Available amenities:");
 
-    for (int i = 0; i < HotelDatabase.amenities.size(); i++) {
-        System.out.println(i + ": " + HotelDatabase.amenities.get(i));
-    }
-
-    System.out.println("Enter amenity index or type 'done' to finish:");
-
-    while (true) {
-
-        String inputValue = input.next();
-
-        if (inputValue.equalsIgnoreCase("done")) {
-            break;
+        for (int i = 0; i < HotelDatabase.amenities.size(); i++) {
+            System.out.println(i + ": " + HotelDatabase.amenities.get(i));
         }
 
-        try {
-            int choice = Integer.parseInt(inputValue);
-
-            if (choice >= 0 && choice < HotelDatabase.amenities.size()) {
-
-                Amenity a = HotelDatabase.amenities.get(choice);
-
-                try {
-                    room.addAmenity(a);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-
-            } else {
-                System.out.println("Invalid index!");
-            }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid number or 'done'");
-        }
-    }
-}
-
-    //make Reservation
-   public void makeReservation(Scanner input) {
-
-    try {
-
-        Room selectedRoom = null;
+        System.out.println("Enter amenity index or type 'done' to finish:");
 
         while (true) {
 
-            System.out.println("Enter your preferred room type (Single/Double/Triple) or 'exit' to stop:");
-            String pref = input.next();
+            String inputValue = input.next();
 
-            if (pref.equalsIgnoreCase("exit")) {
-                System.out.println("Reservation cancelled.");
-                return;
+            if (inputValue.equalsIgnoreCase("done")) {
+                break;
             }
 
-            
-            List<Room> foundRooms = new ArrayList<>();
+            try {
+                int choice = Integer.parseInt(inputValue);
 
-            for (Room room : HotelDatabase.rooms) {
+                if (choice >= 0 && choice < HotelDatabase.amenities.size()) {
 
-                if (room.getisavailable() &&
-                        room.getType().getCategory().equalsIgnoreCase(pref)) {
+                    Amenity a = HotelDatabase.amenities.get(choice);
 
-                    foundRooms.add(room);
-                }
-            }
+                    try {
+                        room.addAmenity(a);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
 
-         
-            if (!foundRooms.isEmpty()) {
-
-                System.out.println("Available rooms:");
-
-                for (int i = 0; i < foundRooms.size(); i++) {
-                    Room r = foundRooms.get(i);
-
-                    System.out.println(i + ": Room " + r.getRoomNumber()
-                            + " | Price: " + r.getPrice());
+                } else {
+                    System.out.println("Invalid index!");
                 }
 
-                System.out.println("Choose room index:");
-                int choice = input.nextInt();
-
-                if (choice < 0 || choice >= foundRooms.size()) {
-                    System.out.println("Invalid choice!");
-                    continue;
-                }
-
-                selectedRoom = foundRooms.get(choice);
-    
-            }
-
-        
-            else {
-                System.out.println("No rooms available for this preference. Try another.");
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number or 'done'");
             }
         }
-
-        
-        chooseAmenities(selectedRoom, input);
-
-        
-        System.out.println("Enter check-in day:");
-        int inDay = input.nextInt();
-
-        System.out.println("Enter check-out day:");
-        int outDay = input.nextInt();
-
-        Date checkin = new Date(2026 - 1900, 5, inDay);
-        Date checkout = new Date(2026 - 1900, 5, outDay);
-
-        
-        Reservation res = new Reservation(selectedRoom, this, checkin, checkout);
-
-        reservations.add(res);
-        HotelDatabase.reservations.add(res);
-
-        res.confirm();
-
-        System.out.println("Reservation successful!");
-
-    } catch (Exception e) {
-        System.out.println(e.getMessage());
     }
-}
+
+    //make Reservation
+    public void makeReservation(Scanner input) {
+
+        try {
+
+            Room selectedRoom = null;
+
+            while (true) {
+
+                System.out.println("Enter your preferred room type (Single/Double/Triple) or 'exit' to stop:");
+                String pref = input.next();
+
+                if (pref.equalsIgnoreCase("exit")) {
+                    System.out.println("Reservation cancelled.");
+                    return;
+                }
+
+
+                List<Room> foundRooms = new ArrayList<>();
+
+                for (Room room : HotelDatabase.rooms) {
+
+                    if (room.isAvailable() &&
+                            room.getType().getCategory().equalsIgnoreCase(pref)) {
+                        foundRooms.add(room);
+                    }
+                }
+
+
+                if (!foundRooms.isEmpty()) {
+
+                    System.out.println("Available rooms:");
+
+                    for (int i = 0; i < foundRooms.size(); i++) {
+                        Room r = foundRooms.get(i);
+
+                        System.out.println(i + ": Room " + r.getRoomNumber()
+                                + " | Price: " + r.getPrice());
+                    }
+
+                    System.out.println("Choose room index:");
+                    int choice = input.nextInt();
+
+                    if (choice < 0 || choice >= foundRooms.size()) {
+                        System.out.println("Invalid choice!");
+                        continue;
+                    }
+
+                    selectedRoom = foundRooms.get(choice);
+                    break;
+                }
+
+                else {
+                    System.out.println("No rooms available for this preference. Try another.");
+                }
+            }
+
+
+            chooseAmenities(selectedRoom, input);
+
+
+            System.out.println("Enter check-in day:");
+            int inDay = input.nextInt();
+
+            System.out.println("Enter check-out day:");
+            int outDay = input.nextInt();
+
+            Date checkin = new Date(2026 - 1900, 5, inDay);
+            Date checkout = new Date(2026 - 1900, 5, outDay);
+
+
+            Reservation res = new Reservation(selectedRoom, this, checkin, checkout);
+
+            reservations.add(res);
+            HotelDatabase.reservations.add(res);
+
+            res.confirm();
+
+            System.out.println("Reservation successful!");
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 
 
-    
+
     //cancle reservation
     public void cancelReservation(Reservation r) {
 
@@ -363,7 +361,7 @@ public class Guest {
         }
     }
 
-     @Override
+    @Override
     public String toString(){
         return "Guest {" +
                 "username: " + username +
@@ -379,7 +377,6 @@ public class Guest {
 
 
 }
-
 
 
 
