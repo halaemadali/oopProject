@@ -363,6 +363,21 @@ public class Guest {
         }
     }
 
+     @Override
+    public String toString(){
+        return "Guest {" +
+                "username: " + username +
+                ", dateOfBirth: " + dateOfBirth +
+                ", balance: " + balance +
+                ", address: " + address +
+                ", gender: " + gender +
+                "Reservations: " + reservations.size() +
+                '}';
+
+
+    }
+
+
 }
 
 
