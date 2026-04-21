@@ -35,4 +35,11 @@ public class Amenity {
         return getName();
     }
 
+    @Override
+    public String toString(){
+        return    "( " + name +
+                " price: "  + price + " )";
+
+    }
+
 }
