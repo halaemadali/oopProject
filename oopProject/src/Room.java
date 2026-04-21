@@ -208,12 +208,11 @@ public void addAmenity(Amenity amenity) {
 
     @Override
     public String toString() {
-        return "Room{" +
-                "roomNumber=" + roomNumber +
-                ", type=" + type +
-                ", price=" + price +
-                ", available=" + isAvailable +
-                ", amenities=" + Amenities.size() +
-                '}';
+        return "Room " + roomNumber +
+                ",Type: " + type +
+                ",View: " + view +
+                ",Floor: " + floor +
+                ",Price: " + price +
+                ",Available: " + (isAvailable ? "Yes" : "No");
     }
 }
