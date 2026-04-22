@@ -1,6 +1,7 @@
+
 import java.time.LocalDate;
 
-public abstract class Staff {
+public abstract class Staff implements Manageable{
 
     protected String username;
     protected String password;
@@ -191,20 +192,16 @@ public abstract class Staff {
 
 
     public void confirmReservation(int reservationId) {
-
         for (Reservation r : HotelDatabase.reservations) {
-
             if (r.getID() == reservationId) {
-
-                if (r.getStatus() != ReservationStatus.PENDING) {
-                    System.out.println("Only PENDING reservations can be confirmed");
-                    return;
-                } else if (r.getStatus() == ReservationStatus.CONFIRMED) {
+                if (r.getStatus() == ReservationStatus.CONFIRMED) {
                     System.out.println("Already confirmed");
                     return;
                 }
-
-
+                if (r.getStatus() != ReservationStatus.PENDING) {
+                    System.out.println("Only PENDING reservations can be confirmed");
+                    return;
+                }
                 r.confirm();
                 System.out.println("Reservation CONFIRMED");
                 return;
@@ -234,15 +231,12 @@ public abstract class Staff {
     }
 
 
-
     @Override
     public String toString() {
         return "Staff: " + username +
-                ",Role: " + role +
-                ",Working Hours: " + workingHours;
+                ", Role: " + role +
+                ", Date of Birth: " + dateOfBirth +
+                ", Working Hours: " + workingHours;
     }
 
 }
-
-
-
