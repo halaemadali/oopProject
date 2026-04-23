@@ -38,6 +38,28 @@ public class Main {
         }
     }
 
+
+    static LocalDate readDateOfBirth() {
+        while (true) {
+            System.out.print("Date of Birth (yyyy-MM-dd): ");
+            String input = sc.nextLine().trim();
+
+            try {
+                LocalDate dob = LocalDate.parse(input, DATE_FMT);
+
+                if (dob.isAfter(LocalDate.now())) {
+                    System.out.println(" Date of birth cannot be in the future. Try again.");
+                    continue;
+                }
+
+                return dob;
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid format. Please use yyyy-MM-dd");
+            }
+        }
+    }
+
     // ─────────────────────────────────────────────
     //  GUEST ENTRY  (register or login)
     // ─────────────────────────────────────────────
@@ -61,21 +83,35 @@ public class Main {
 
     static void guestRegister() {
         System.out.println("\n--- Guest Registration ---");
+
         try {
             System.out.print("Username: ");
             String username = sc.nextLine().trim();
-            if (username.isEmpty()) { System.out.println("Username cannot be empty."); return; }
 
             System.out.print("Password (min 6 chars): ");
             String password = sc.nextLine().trim();
 
-            System.out.print("Date of Birth (yyyy-MM-dd): ");
-            LocalDate dob = parseDate(sc.nextLine().trim());
-            if (dob == null) return;
+
+            while (true) {
+                try {
+                    Guest temp = new Guest();
+                    temp.setPassword(password);
+                    break; // valid password
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    System.out.print("Enter password again: ");
+                    password = sc.nextLine().trim();
+                }
+            }
+
+            LocalDate dob = readDateOfBirth();
 
             System.out.print("Balance: ");
             double balance = readDouble();
-            if (balance < 0) { System.out.println("Balance cannot be negative."); return; }
+            if (balance < 0) {
+                System.out.println("Balance cannot be negative.");
+                return;
+            }
 
             System.out.print("Address: ");
             String address = sc.nextLine().trim();
