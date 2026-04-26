@@ -8,7 +8,8 @@ public class Invoice implements Payable {
     private boolean isPaid;
     private PaymentMethod method;
 
-    public Invoice() {
+   public Invoice() {
+        HotelDatabase.invoices.add(this);
     }
 
     public Invoice(Reservation r) {
@@ -16,8 +17,8 @@ public class Invoice implements Payable {
         this.ID = this.reservation.getID();
         this.amount = calculateTotal();
         this.isPaid = false;
+        HotelDatabase.invoices.add(this);
     }
-
     public int getID() {
         return ID;
     }
