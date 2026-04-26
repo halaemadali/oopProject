@@ -11,6 +11,7 @@ class HotelDatabase {
   public static ArrayList<Amenity> amenities = new ArrayList<>();
   public static ArrayList<Admin> admins = new ArrayList<>();
   public static ArrayList<Receptionist> receptionists = new ArrayList<>();
+  public static ArrayList<Invoice> invoices = new ArrayList<>();
 
   static Random rand = new Random();
 
