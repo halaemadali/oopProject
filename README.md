@@ -17,11 +17,11 @@ complete backend structure.
 ## Team Members
 | Name | Student ID | Contribution |
 |------|-----------|--------------|
-| Member 1 | ID | Project Lead, HotelDatabase, Main |
-| Member 2 | ID | Guest, Reservation |
-| Member 3 | ID | Room, RoomType, Amenity |
-| Member 4 | ID | Staff, Admin, Receptionist |
-| Member 5 | ID | Invoice, Exceptions, Interfaces |
+| Salma Kahaled Shafek | 25p0196 | Reservation, Invoice |
+| Mariam MohamedRamzy | 25p0129 | Guest, HotelDateBase |
+| Hala Emad Ali Abdelkawy | 25p0130 | Room, RoomType, Amenity |
+| Sara Ahmed Mostafa ElNahass | 25p0013 | Staff, Admin, Receptionist |
+| Hagar Hossam El Deen Abd El Majeed | 25p0116 | Room, RoomType, Amenity |
 
 ---
 
