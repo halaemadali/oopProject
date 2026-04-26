@@ -10,18 +10,20 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-   
+    // ─────────────────────────────────────────────
+    //  ENTRY POINT
+    // ─────────────────────────────────────────────
     public static void main(String[] args) {
         HotelDatabase.initializeData();
         System.out.println("╔══════════════════════════════════════╗");
-        System.out.println("║  Welcome to Hotel Management System  ║");
+        System.out.println("║    Welcome to Hotel Management System ║");
         System.out.println("╚══════════════════════════════════════╝");
 
         while (true) {
-            System.out.println("\n********** MAIN MENU **********");
-            System.out.println("1. com.hotel.models.Guest");
-            System.out.println("2. com.hotel.models.Receptionist Login");
-            System.out.println("3. com.hotel.models.Admin Login");
+            System.out.println("\n========== MAIN MENU ==========");
+            System.out.println("1. Guest");
+            System.out.println("2. Receptionist Login");
+            System.out.println("3. Admin Login");
             System.out.println("0. Exit");
             System.out.print("Select: ");
 
@@ -30,7 +32,7 @@ public class Main {
                 case 1 -> guestEntryMenu();
                 case 2 -> receptionistLoginMenu();
                 case 3 -> adminLoginMenu();
-                case 0 -> { System.out.println("Thank you for using our application"); return; }
+                case 0 -> { System.out.println("Goodbye!"); return; }
                 default -> System.out.println("Invalid option. Try again.");
             }
         }
@@ -58,9 +60,11 @@ public class Main {
         }
     }
 
-    //com.hotel.models.Guest Registration and Login
+    // ─────────────────────────────────────────────
+    //  GUEST ENTRY  (register or login)
+    // ─────────────────────────────────────────────
     static void guestEntryMenu() {
-        System.out.println("\n--- com.hotel.models.Guest Entry ---");
+        System.out.println("\n--- Guest Entry ---");
         System.out.println("1. Register");
         System.out.println("2. Login");
         System.out.println("0. Back");
@@ -78,7 +82,7 @@ public class Main {
     }
 
     static void guestRegister() {
-        System.out.println("\n--- com.hotel.models.Guest Registration ---");
+        System.out.println("\n--- Guest Registration ---");
 
         try {
             System.out.print("Username: ");
@@ -112,7 +116,7 @@ public class Main {
             System.out.print("Address: ");
             String address = sc.nextLine().trim();
 
-            System.out.print("com.hotel.enums.Gender (MALE/FEMALE): ");
+            System.out.print("Gender (MALE/FEMALE): ");
             Gender gender = parseGender(sc.nextLine().trim());
             if (gender == null) return;
 
@@ -127,7 +131,7 @@ public class Main {
     }
 
     static Guest guestLogin() {
-        System.out.println("\n--- com.hotel.models.Guest Login ---");
+        System.out.println("\n--- Guest Login ---");
         System.out.print("Username: ");
         String u = sc.nextLine().trim();
         System.out.print("Password: ");
@@ -136,15 +140,17 @@ public class Main {
         return g;
     }
 
-    // com.hotel.models.Guest Menu
+    // ─────────────────────────────────────────────
+    //  GUEST MENU
+    // ─────────────────────────────────────────────
     static void guestMenu(Guest guest) {
         while (true) {
             System.out.println("\n========== GUEST MENU [" + guest.getUsername() + "] ==========");
-            System.out.println("1.  com.hotel.enums.View My Reservations");
-            System.out.println("2.  Make a com.hotel.models.Reservation");
-            System.out.println("3.  Cancel a com.hotel.models.Reservation");
+            System.out.println("1.  View My Reservations");
+            System.out.println("2.  Make a Reservation");
+            System.out.println("3.  Cancel a Reservation");
             System.out.println("4.  Check Out (self-service)");
-            System.out.println("5.  com.hotel.enums.View Available Amenities");
+            System.out.println("5.  View Available Amenities");
             System.out.println("0.  Logout");
             System.out.print("Select: ");
 
@@ -161,26 +167,26 @@ public class Main {
     }
 
     static void guestMakeReservation(Guest guest) {
-        System.out.println("\n--- Make com.hotel.models.Reservation ---");
+        System.out.println("\n--- Make Reservation ---");
         try {
             // Show available room types
-            System.out.println("Available com.hotel.models.Room Types:");
+            System.out.println("Available Room Types:");
             for (RoomType rt : HotelDatabase.roomTypes)
                 System.out.println("  " + rt.getroomTypeId() + ". " + rt.getCategory()
                         + " | Capacity: " + rt.getCapacity()
                         + " | Base Price: $" + rt.getBasePrice());
 
-            System.out.print("Enter com.hotel.models.Room Type ID: ");
+            System.out.print("Enter Room Type ID: ");
             int typeId = readInt();
             RoomType selectedType = null;
             for (RoomType rt : HotelDatabase.roomTypes)
                 if (rt.getroomTypeId() == typeId) { selectedType = rt; break; }
-            if (selectedType == null) { System.out.println("com.hotel.models.Room type not found."); return; }
+            if (selectedType == null) { System.out.println("Room type not found."); return; }
 
             System.out.println("Available Views:");
             for (View v : View.values())
                 System.out.println("  " + v.name() + " (+$" + v.getPrice() + ")");
-            System.out.print("Enter com.hotel.enums.View (e.g. SEA_VIEW): ");
+            System.out.print("Enter View (e.g. SEA_VIEW): ");
             View view = parseView(sc.nextLine().trim());
             if (view == null) return;
 
@@ -195,7 +201,7 @@ public class Main {
             // Show available rooms
             List<Room> availableRooms = guest.makeReservation(selectedType, view, checkin, checkout);
 
-            System.out.print("\nEnter com.hotel.models.Room Number to book: ");
+            System.out.print("\nEnter Room Number to book: ");
             int roomNumber = readInt();
 
             // Optional amenities
@@ -228,9 +234,9 @@ public class Main {
     }
 
     static void guestCancelReservation(Guest guest) {
-        System.out.println("\n--- Cancel com.hotel.models.Reservation ---");
+        System.out.println("\n--- Cancel Reservation ---");
         guest.viewReservations();
-        System.out.print("Enter com.hotel.models.Room Number to cancel: ");
+        System.out.print("Enter Room Number to cancel: ");
         int roomNum = readInt();
         guest.cancelReservation(roomNum);
     }
@@ -238,7 +244,7 @@ public class Main {
     static void guestCheckOut(Guest guest) {
         System.out.println("\n--- Self-Service Check Out ---");
         guest.viewReservations();
-        System.out.print("Enter com.hotel.models.Room Number: ");
+        System.out.print("Enter Room Number: ");
         int roomNum = readInt();
         PaymentMethod method = selectPaymentMethod();
         if (method == null) return;
@@ -249,9 +255,11 @@ public class Main {
         }
     }
 
-    //com.hotel.models.Receptionist Login
+    // ─────────────────────────────────────────────
+    //  RECEPTIONIST LOGIN + MENU
+    // ─────────────────────────────────────────────
     static void receptionistLoginMenu() {
-        System.out.println("\n--- com.hotel.models.Receptionist Login ---");
+        System.out.println("\n--- Receptionist Login ---");
         System.out.print("Username: ");
         String u = sc.nextLine().trim();
         System.out.print("Password: ");
@@ -269,16 +277,16 @@ public class Main {
     static void receptionistMenu(Receptionist rec) {
         while (true) {
             System.out.println("\n========== RECEPTIONIST MENU [" + rec.getUsername() + "] ==========");
-            System.out.println("1.  com.hotel.enums.View All Guests");
-            System.out.println("2.  com.hotel.enums.View All Rooms");
-            System.out.println("3.  com.hotel.enums.View All Reservations");
-            System.out.println("4.  com.hotel.enums.View Pending Reservations");
-            System.out.println("5.  Confirm com.hotel.models.Reservation");
-            System.out.println("6.  Cancel com.hotel.models.Reservation");
-            System.out.println("7.  Check In com.hotel.models.Guest");
-            System.out.println("8.  Process com.hotel.models.Guest Checkout");
-            System.out.println("9.  com.hotel.enums.View Checked-Out Reservations");
-            System.out.println("10. Complete com.hotel.models.Reservation");
+            System.out.println("1.  View All Guests");
+            System.out.println("2.  View All Rooms");
+            System.out.println("3.  View All Reservations");
+            System.out.println("4.  View Pending Reservations");
+            System.out.println("5.  Confirm Reservation");
+            System.out.println("6.  Cancel Reservation");
+            System.out.println("7.  Check In Guest");
+            System.out.println("8.  Process Guest Checkout");
+            System.out.println("9.  View Checked-Out Reservations");
+            System.out.println("10. Complete Reservation");
             System.out.println("0.  Logout");
             System.out.print("Select: ");
 
@@ -288,31 +296,31 @@ public class Main {
                 case 3  -> rec.viewAllReservations();
                 case 4  -> rec.viewAllPendingReservations();
                 case 5  -> {
-                    System.out.print("com.hotel.models.Reservation ID: ");
+                    System.out.print("Reservation ID: ");
                     rec.confirmReservation(readInt());
                 }
                 case 6  -> {
-                    System.out.print("com.hotel.models.Reservation ID: ");
+                    System.out.print("Reservation ID: ");
                     rec.cancelReservation(readInt());
                 }
                 case 7  -> {
-                    System.out.print("com.hotel.models.Guest username: ");
+                    System.out.print("Guest username: ");
                     String uname = sc.nextLine().trim();
-                    System.out.print("com.hotel.models.Reservation ID: ");
+                    System.out.print("Reservation ID: ");
                     int resId = readInt();
                     rec.checkIn(uname, resId);
                 }
                 case 8  -> {
-                    System.out.print("com.hotel.models.Guest username: ");
+                    System.out.print("Guest username: ");
                     String uname = sc.nextLine().trim();
-                    System.out.print("com.hotel.models.Room Number: ");
+                    System.out.print("Room Number: ");
                     int roomNum = readInt();
                     PaymentMethod method = selectPaymentMethod();
                     if (method != null) rec.processGuestCheckout(uname, roomNum, method);
                 }
                 case 9  -> rec.viewAllCheckedOutReservations();
                 case 10 -> {
-                    System.out.print("com.hotel.models.Reservation ID: ");
+                    System.out.print("Reservation ID: ");
                     rec.completeReservation(readInt());
                 }
                 case 0  -> { System.out.println("Logged out."); return; }
@@ -321,9 +329,11 @@ public class Main {
         }
     }
 
-    // com.hotel.models.Admin Login
+    // ─────────────────────────────────────────────
+    //  ADMIN LOGIN + MENU
+    // ─────────────────────────────────────────────
     static void adminLoginMenu() {
-        System.out.println("\n--- com.hotel.models.Admin Login ---");
+        System.out.println("\n--- Admin Login ---");
         System.out.print("Username: ");
         String u = sc.nextLine().trim();
         System.out.print("Password: ");
@@ -342,49 +352,49 @@ public class Main {
         while (true) {
             System.out.println("\n========== ADMIN MENU [" + admin.getUsername() + "] ==========");
             System.out.println("--- Rooms ---");
-            System.out.println("1.  Add com.hotel.models.Room");
-            System.out.println("2.  com.hotel.enums.View com.hotel.models.Room");
-            System.out.println("3.  Update com.hotel.models.Room");
-            System.out.println("4.  Delete com.hotel.models.Room");
-            System.out.println("5.  com.hotel.enums.View All Rooms");
-            System.out.println("--- com.hotel.models.Room Types ---");
-            System.out.println("6.  Add com.hotel.models.Room Type");
-            System.out.println("7.  com.hotel.enums.View com.hotel.models.Room Type");
-            System.out.println("8.  com.hotel.enums.View All com.hotel.models.Room Types");
-            System.out.println("9.  Update com.hotel.models.Room Type");
-            System.out.println("10. Delete com.hotel.models.Room Type");
+            System.out.println("1.  Add Room");
+            System.out.println("2.  View Room");
+            System.out.println("3.  Update Room");
+            System.out.println("4.  Delete Room");
+            System.out.println("5.  View All Rooms");
+            System.out.println("--- Room Types ---");
+            System.out.println("6.  Add Room Type");
+            System.out.println("7.  View Room Type");
+            System.out.println("8.  View All Room Types");
+            System.out.println("9.  Update Room Type");
+            System.out.println("10. Delete Room Type");
             System.out.println("--- Amenities ---");
-            System.out.println("11. Add com.hotel.models.Amenity");
-            System.out.println("12. com.hotel.enums.View All Amenities");
-            System.out.println("13. Update com.hotel.models.Amenity Price");
-            System.out.println("14. Delete com.hotel.models.Amenity");
-            System.out.println("15. Add com.hotel.models.Amenity to com.hotel.models.Room");
-            System.out.println("16. com.hotel.enums.View Amenities in com.hotel.models.Room");
-            System.out.println("17. Remove com.hotel.models.Amenity from com.hotel.models.Room");
-            System.out.println("--- com.hotel.models.Staff & Guests ---");
-            System.out.println("18. Add com.hotel.models.Receptionist Account");
-            System.out.println("19. com.hotel.enums.View All Guests");
-            System.out.println("20. com.hotel.enums.View All Reservations");
+            System.out.println("11. Add Amenity");
+            System.out.println("12. View All Amenities");
+            System.out.println("13. Update Amenity Price");
+            System.out.println("14. Delete Amenity");
+            System.out.println("15. Add Amenity to Room");
+            System.out.println("16. View Amenities in Room");
+            System.out.println("17. Remove Amenity from Room");
+            System.out.println("--- Staff & Guests ---");
+            System.out.println("18. Add Receptionist Account");
+            System.out.println("19. View All Guests");
+            System.out.println("20. View All Reservations");
             System.out.println("0.  Logout");
             System.out.print("Select: ");
 
             switch (readInt()) {
                 case 1  -> adminAddRoom(admin);
-                case 2  -> { System.out.print("com.hotel.models.Room Number: "); admin.viewRoom(readInt()); }
+                case 2  -> { System.out.print("Room Number: "); admin.viewRoom(readInt()); }
                 case 3  -> adminUpdateRoom(admin);
                 case 4  -> adminDeleteRoom(admin);
                 case 5  -> admin.viewAllRooms();
                 case 6  -> adminAddRoomType(admin);
-                case 7  -> { System.out.print("com.hotel.models.Room Type ID: "); admin.viewRoomType(readInt()); }
+                case 7  -> { System.out.print("Room Type ID: "); admin.viewRoomType(readInt()); }
                 case 8  -> admin.viewAllRoomTypes();
                 case 9  -> adminUpdateRoomType(admin);
-                case 10 -> { System.out.print("com.hotel.models.Room Type ID to delete: "); adminDeleteRoomType(admin, readInt()); }
+                case 10 -> { System.out.print("Room Type ID to delete: "); adminDeleteRoomType(admin, readInt()); }
                 case 11 -> adminAddAmenity(admin);
                 case 12 -> admin.viewAllAmenities();
                 case 13 -> adminUpdateAmenity(admin);
                 case 14 -> adminDeleteAmenity(admin);
                 case 15 -> adminAddAmenityToRoom(admin);
-                case 16 -> { System.out.print("com.hotel.models.Room Number: "); admin.viewAmenitiesInRoom(readInt()); }
+                case 16 -> { System.out.print("Room Number: "); admin.viewAmenitiesInRoom(readInt()); }
                 case 17 -> adminRemoveAmenityFromRoom(admin);
                 case 18 -> adminAddReceptionist(admin);
                 case 19 -> admin.viewAllGuests();
@@ -395,24 +405,24 @@ public class Main {
         }
     }
 
-    //com.hotel.models.Admin sub-actions
+    // ─── Admin sub-actions ───────────────────────
 
     static void adminAddRoom(Admin admin) {
-        System.out.println("\n--- Add com.hotel.models.Room ---");
+        System.out.println("\n--- Add Room ---");
         try {
-            System.out.print("com.hotel.models.Room Number: ");
+            System.out.print("Room Number: ");
             int roomNum = readInt();
 
             admin.viewAllRoomTypes();
-            System.out.print("com.hotel.models.Room Type ID: ");
+            System.out.print("Room Type ID: ");
             int typeId = readInt();
             RoomType selectedType = null;
             for (RoomType rt : HotelDatabase.roomTypes)
                 if (rt.getroomTypeId() == typeId) { selectedType = rt; break; }
-            if (selectedType == null) { System.out.println("com.hotel.models.Room type not found."); return; }
+            if (selectedType == null) { System.out.println("Room type not found."); return; }
 
             System.out.println("Views: " + java.util.Arrays.toString(View.values()));
-            System.out.print("com.hotel.enums.View (e.g. SEA_VIEW): ");
+            System.out.print("View (e.g. SEA_VIEW): ");
             View view = parseView(sc.nextLine().trim());
             if (view == null) return;
 
@@ -429,25 +439,25 @@ public class Main {
     }
 
     static void adminUpdateRoom(Admin admin) {
-        System.out.println("\n--- Update com.hotel.models.Room ---");
-        System.out.print("com.hotel.models.Room Number to update: ");
+        System.out.println("\n--- Update Room ---");
+        System.out.print("Room Number to update: ");
         int roomNum = readInt();
 
         System.out.println("What to update?");
-        System.out.println("1. com.hotel.models.Room Number");
-        System.out.println("2. com.hotel.models.Room Type");
+        System.out.println("1. Room Number");
+        System.out.println("2. Room Type");
         System.out.println("3. Availability");
         System.out.println("4. Price");
         System.out.print("Select: ");
 
         switch (readInt()) {
             case 1 -> {
-                System.out.print("New com.hotel.models.Room Number: ");
+                System.out.print("New Room Number: ");
                 admin.updateRoomNumber(roomNum, readInt());
             }
             case 2 -> {
                 admin.viewAllRoomTypes();
-                System.out.print("New com.hotel.models.Room Type ID: ");
+                System.out.print("New Room Type ID: ");
                 int tid = readInt();
                 RoomType t = null;
                 for (RoomType rt : HotelDatabase.roomTypes)
@@ -469,8 +479,8 @@ public class Main {
     }
 
     static void adminDeleteRoom(Admin admin) {
-        System.out.println("\n--- Delete com.hotel.models.Room ---");
-        System.out.print("com.hotel.models.Room Number: ");
+        System.out.println("\n--- Delete Room ---");
+        System.out.print("Room Number: ");
         int rn = readInt();
         try {
             admin.deleteRoom(rn);
@@ -480,7 +490,7 @@ public class Main {
     }
 
     static void adminAddRoomType(Admin admin) {
-        System.out.println("\n--- Add com.hotel.models.Room Type ---");
+        System.out.println("\n--- Add Room Type ---");
         try {
             System.out.print("Category name: ");
             String cat = sc.nextLine().trim();
@@ -495,9 +505,9 @@ public class Main {
     }
 
     static void adminUpdateRoomType(Admin admin) {
-        System.out.println("\n--- Update com.hotel.models.Room Type ---");
+        System.out.println("\n--- Update Room Type ---");
         admin.viewAllRoomTypes();
-        System.out.print("com.hotel.models.Room Type ID to update: ");
+        System.out.print("Room Type ID to update: ");
         int rtId = readInt();
 
         System.out.println("What to update?");
@@ -527,8 +537,8 @@ public class Main {
     }
 
     static void adminAddAmenity(Admin admin) {
-        System.out.println("\n--- Add com.hotel.models.Amenity ---");
-        System.out.print("com.hotel.models.Amenity name: ");
+        System.out.println("\n--- Add Amenity ---");
+        System.out.print("Amenity name: ");
         String name = sc.nextLine().trim();
         if (name.isEmpty()) { System.out.println("Name cannot be empty."); return; }
         System.out.print("Price: ");
@@ -541,9 +551,9 @@ public class Main {
     }
 
     static void adminUpdateAmenity(Admin admin) {
-        System.out.println("\n--- Update com.hotel.models.Amenity Price ---");
+        System.out.println("\n--- Update Amenity Price ---");
         admin.viewAllAmenities();
-        System.out.print("com.hotel.models.Amenity name: ");
+        System.out.print("Amenity name: ");
         String name = sc.nextLine().trim();
         System.out.print("New price: ");
         double price = readDouble();
@@ -551,9 +561,9 @@ public class Main {
     }
 
     static void adminDeleteAmenity(Admin admin) {
-        System.out.println("\n--- Delete com.hotel.models.Amenity ---");
+        System.out.println("\n--- Delete Amenity ---");
         admin.viewAllAmenities();
-        System.out.print("com.hotel.models.Amenity name: ");
+        System.out.print("Amenity name: ");
         String name = sc.nextLine().trim();
         try {
             admin.deleteAmenity(name);
@@ -563,27 +573,27 @@ public class Main {
     }
 
     static void adminAddAmenityToRoom(Admin admin) {
-        System.out.println("\n--- Add com.hotel.models.Amenity to com.hotel.models.Room ---");
-        System.out.print("com.hotel.models.Room Number: ");
+        System.out.println("\n--- Add Amenity to Room ---");
+        System.out.print("Room Number: ");
         int rn = readInt();
         admin.viewAllAmenities();
-        System.out.print("com.hotel.models.Amenity name: ");
+        System.out.print("Amenity name: ");
         String name = sc.nextLine().trim();
         admin.addAmenityToRoom(rn, name);
     }
 
     static void adminRemoveAmenityFromRoom(Admin admin) {
-        System.out.println("\n--- Remove com.hotel.models.Amenity from com.hotel.models.Room ---");
-        System.out.print("com.hotel.models.Room Number: ");
+        System.out.println("\n--- Remove Amenity from Room ---");
+        System.out.print("Room Number: ");
         int rn = readInt();
         admin.viewAmenitiesInRoom(rn);
-        System.out.print("com.hotel.models.Amenity name to remove: ");
+        System.out.print("Amenity name to remove: ");
         String name = sc.nextLine().trim();
         admin.removeAmenityFromRoom(rn, name);
     }
 
     static void adminAddReceptionist(Admin admin) {
-        System.out.println("\n--- Add com.hotel.models.Receptionist Account ---");
+        System.out.println("\n--- Add Receptionist Account ---");
         try {
             System.out.print("Username: ");
             String u = sc.nextLine().trim();
@@ -595,7 +605,7 @@ public class Main {
             System.out.print("Working Hours: ");
             int wh = readInt();
             admin.addReceptionist(u, p, dob, wh);
-            System.out.println("com.hotel.models.Receptionist added successfully.");
+            System.out.println("Receptionist added successfully.");
         } catch (InvalidUsernameException e) {
             System.out.println("Username error: " + e.getMessage());
         } catch (Exception e) {
@@ -631,7 +641,7 @@ public class Main {
         }
     }
 
-    // pasrses date string
+    /** Parses a date string; prints an error and returns null on failure. */
     static LocalDate parseDate(String s) {
         try {
             return LocalDate.parse(s, DATE_FMT);
@@ -641,7 +651,7 @@ public class Main {
         }
     }
 
-    // parses gender
+    /** Parses a Gender; prints an error and returns null on failure. */
     static Gender parseGender(String s) {
         try {
             return Gender.valueOf(s.toUpperCase());
@@ -651,7 +661,7 @@ public class Main {
         }
     }
 
-    // parses view
+    /** Parses a View enum; prints an error and returns null on failure. */
     static View parseView(String s) {
         try {
             return View.valueOf(s.toUpperCase());
@@ -661,7 +671,7 @@ public class Main {
         }
     }
 
-    // selecting payment methods
+    /** Prompts the user to select a PaymentMethod. */
     static PaymentMethod selectPaymentMethod() {
         System.out.println("Payment Method:");
         System.out.println("1. CASH");
