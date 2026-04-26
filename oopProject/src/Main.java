@@ -10,9 +10,7 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    // ─────────────────────────────────────────────
-    //  ENTRY POINT
-    // ─────────────────────────────────────────────
+   
     public static void main(String[] args) {
         HotelDatabase.initializeData();
         System.out.println("╔══════════════════════════════════════╗");
