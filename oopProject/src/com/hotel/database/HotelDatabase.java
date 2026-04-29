@@ -1,8 +1,17 @@
+package com.hotel.database;
+
+import com.hotel.enums.Gender;
+import com.hotel.enums.ReservationStatus;
+import com.hotel.enums.View;
+import com.hotel.models.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.time.LocalDate;
+import com.hotel.enums.*;
+import com.hotel.exceptions.*;
+import com.hotel.interfaces.*;
 
-class HotelDatabase {
+public class HotelDatabase {
 
   public static ArrayList<Guest> guests = new ArrayList<>();
   public static ArrayList<Room> rooms = new ArrayList<>();
@@ -11,6 +20,7 @@ class HotelDatabase {
   public static ArrayList<Amenity> amenities = new ArrayList<>();
   public static ArrayList<Admin> admins = new ArrayList<>();
   public static ArrayList<Receptionist> receptionists = new ArrayList<>();
+  public static ArrayList<Invoice> invoices = new ArrayList<>();
 
   static Random rand = new Random();
 

@@ -1,3 +1,5 @@
+package com.hotel.interfaces;
+
 public interface Manageable {
     void viewAllGuests();
     void viewAllRooms();

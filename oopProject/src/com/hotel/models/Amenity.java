@@ -1,3 +1,5 @@
+package com.hotel.models;
+
 public class Amenity {
     private String name;
     private double price;   // price per unit

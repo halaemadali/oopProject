@@ -1,3 +1,9 @@
+package com.hotel.models;
+
+import com.hotel.enums.*;
+import com.hotel.exceptions.*;
+import com.hotel.database.*;
+import com.hotel.interfaces.*;
 
 public class RoomType {
     //single,double,suite
@@ -93,8 +99,8 @@ public class RoomType {
         return roomTypeId;
     }
 
-    
-     @Override
+
+    @Override
     public String toString() {
         return "ID: " + roomTypeId + ", " +
                 category +

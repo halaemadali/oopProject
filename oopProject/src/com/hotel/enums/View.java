@@ -1,3 +1,5 @@
+package com.hotel.enums;
+
 public enum View {
 
     SEA_VIEW(200),

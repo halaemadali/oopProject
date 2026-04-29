@@ -1,4 +1,10 @@
+package com.hotel.models;
+
 import java.time.LocalDate;
+import com.hotel.enums.*;
+import com.hotel.exceptions.*;
+import com.hotel.database.*;
+import com.hotel.interfaces.*;
 
 public class Receptionist extends Staff {
 

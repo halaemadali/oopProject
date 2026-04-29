@@ -1,3 +1,14 @@
+package com.hotel;
+
+import com.hotel.database.HotelDatabase;
+import com.hotel.enums.Gender;
+import com.hotel.enums.PaymentMethod;
+import com.hotel.enums.View;
+import com.hotel.exceptions.InvalidPaymentException;
+import com.hotel.exceptions.InvalidUsernameException;
+import com.hotel.exceptions.RoomNotAvailableException;
+import com.hotel.models.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,17 +21,15 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    // ─────────────────────────────────────────────
-    //  ENTRY POINT
-    // ─────────────────────────────────────────────
+
     public static void main(String[] args) {
         HotelDatabase.initializeData();
         System.out.println("╔══════════════════════════════════════╗");
-        System.out.println("║    Welcome to Hotel Management System ║");
+        System.out.println("║  Welcome to Hotel Management System  ║");
         System.out.println("╚══════════════════════════════════════╝");
 
         while (true) {
-            System.out.println("\n========== MAIN MENU ==========");
+            System.out.println("\n********** MAIN MENU **********");
             System.out.println("1. Guest");
             System.out.println("2. Receptionist Login");
             System.out.println("3. Admin Login");
@@ -60,9 +69,7 @@ public class Main {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  GUEST ENTRY  (register or login)
-    // ─────────────────────────────────────────────
+    // Guest Login and Register
     static void guestEntryMenu() {
         System.out.println("\n--- Guest Entry ---");
         System.out.println("1. Register");
@@ -140,9 +147,7 @@ public class Main {
         return g;
     }
 
-    // ─────────────────────────────────────────────
-    //  GUEST MENU
-    // ─────────────────────────────────────────────
+    // Guest Menu
     static void guestMenu(Guest guest) {
         while (true) {
             System.out.println("\n========== GUEST MENU [" + guest.getUsername() + "] ==========");
@@ -255,9 +260,7 @@ public class Main {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  RECEPTIONIST LOGIN + MENU
-    // ─────────────────────────────────────────────
+    // Receptionist LOGIN
     static void receptionistLoginMenu() {
         System.out.println("\n--- Receptionist Login ---");
         System.out.print("Username: ");
@@ -296,6 +299,7 @@ public class Main {
                 case 3  -> rec.viewAllReservations();
                 case 4  -> rec.viewAllPendingReservations();
                 case 5  -> {
+                    rec.viewAllPendingReservations();
                     System.out.print("Reservation ID: ");
                     rec.confirmReservation(readInt());
                 }
@@ -329,9 +333,7 @@ public class Main {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  ADMIN LOGIN + MENU
-    // ─────────────────────────────────────────────
+    // Admin Login
     static void adminLoginMenu() {
         System.out.println("\n--- Admin Login ---");
         System.out.print("Username: ");
@@ -405,7 +407,7 @@ public class Main {
         }
     }
 
-    // ─── Admin sub-actions ───────────────────────
+    // Admin sub-actions
 
     static void adminAddRoom(Admin admin) {
         System.out.println("\n--- Add Room ---");
@@ -613,11 +615,9 @@ public class Main {
         }
     }
 
-    // ─────────────────────────────────────────────
-    //  HELPER UTILITIES
-    // ─────────────────────────────────────────────
 
-    /** Reads an integer, consuming the leftover newline. Returns -1 on bad input. */
+
+    // Reads an integer, Returns -1 on wrong input.
     static int readInt() {
         while (true) {
             String line = sc.nextLine().trim();
@@ -629,7 +629,7 @@ public class Main {
         }
     }
 
-    /** Reads a double, consuming the leftover newline. */
+    // Reads a double
     static double readDouble() {
         while (true) {
             String line = sc.nextLine().trim();
@@ -641,7 +641,7 @@ public class Main {
         }
     }
 
-    /** Parses a date string; prints an error and returns null on failure. */
+    // Parses a date string
     static LocalDate parseDate(String s) {
         try {
             return LocalDate.parse(s, DATE_FMT);
@@ -651,7 +651,7 @@ public class Main {
         }
     }
 
-    /** Parses a Gender; prints an error and returns null on failure. */
+    // Parses Date String
     static Gender parseGender(String s) {
         try {
             return Gender.valueOf(s.toUpperCase());
@@ -661,7 +661,7 @@ public class Main {
         }
     }
 
-    /** Parses a View enum; prints an error and returns null on failure. */
+    // Parses a View enum
     static View parseView(String s) {
         try {
             return View.valueOf(s.toUpperCase());
@@ -671,7 +671,7 @@ public class Main {
         }
     }
 
-    /** Prompts the user to select a PaymentMethod. */
+    // Asks the user to select a PaymentMethod.
     static PaymentMethod selectPaymentMethod() {
         System.out.println("Payment Method:");
         System.out.println("1. CASH");

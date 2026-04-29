@@ -1,4 +1,11 @@
+package com.hotel.models;
+
 import java.time.LocalDate;
+import com.hotel.database.HotelDatabase;
+import com.hotel.enums.*;
+import com.hotel.exceptions.*;
+import com.hotel.database.*;
+import com.hotel.interfaces.*;
 
 public class Admin extends Staff {
 
@@ -19,8 +26,8 @@ public class Admin extends Staff {
 
 
         Room room = new Room(roomNumber, type, isAvailable, view, floor);
-              HotelDatabase.rooms.add(room);
-            System.out.println("Room added successfully " );
+        HotelDatabase.rooms.add(room);
+        System.out.println("Room added successfully " );
     }
 
 
@@ -45,7 +52,7 @@ public class Admin extends Staff {
                 } else {
                     System.out.println("No amenities available");
                 }
-                    return;
+                return;
             }
         }
         System.out.println("Room not found");
@@ -240,9 +247,9 @@ public class Admin extends Staff {
             }
         }
 
-            Amenity a = new Amenity(name, price);
-            HotelDatabase.amenities.add(a);
-            System.out.println("Amenity added: " + name);
+        Amenity a = new Amenity(name, price);
+        HotelDatabase.amenities.add(a);
+        System.out.println("Amenity added: " + name);
 
     }
 
@@ -423,16 +430,3 @@ public class Admin extends Staff {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
