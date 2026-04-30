@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.AvailableRoomsController">
+
+    <!-- ── TOP: Dark header matching ReservationScreen ── -->
+    <top>
+        <VBox alignment="CENTER" style="-fx-background-color: #2c3e50;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="Available Rooms" />
+                <Label fx:id="summaryLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #bdc3c7; -fx-font-size: 13px;" text="" />
+            </children>
+        </VBox>
+    </top>
+
+    <!-- ── CENTER: Two lists side by side ── -->
+    <center>
+        <HBox spacing="20.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="24.0" left="30.0" right="30.0" top="24.0" />
+            </padding>
+            <children>
+
+                <!-- Left column: Room list -->
+                <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Select a Room" />
+                        <Separator />
+                        <ListView fx:id="roomListView" prefHeight="320.0" VBox.vgrow="ALWAYS" />
+                    </children>
+                </VBox>
+
+                <!-- Right column: Amenities list -->
+                <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                    <children>
+                        <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Select Amenities (optional)" />
+                        <Separator />
+                        <Label style="-fx-font-size: 11px; -fx-text-fill: #95a5a6;" text="Hold Ctrl to select multiple" />
+                        <ListView fx:id="amenityListView" prefHeight="300.0" VBox.vgrow="ALWAYS" />
+                    </children>
+                </VBox>
+
+            </children>
+        </HBox>
+    </center>
+
+    <!-- ── BOTTOM: Status label + buttons ── -->
+    <bottom>
+        <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-width: 1 0 0 0;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="14.0" left="30.0" right="30.0" top="14.0" />
+            </padding>
+            <children>
+
+                <!-- Status message -->
+                <Label fx:id="statusLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #e74c3c; -fx-font-size: 13px;" text="" />
+
+                <!-- Buttons -->
+                <HBox alignment="CENTER" spacing="20.0">
+                    <children>
+                        <Button onAction="#handleBack" prefHeight="38.0" prefWidth="180.0" style="-fx-background-color: white; -fx-text-fill: #2c3e50; -fx-border-color: #2c3e50; -fx-border-width: 1.5; -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand;" text="← Back" />
+                        <Button onAction="#handleConfirm" prefHeight="38.0" prefWidth="220.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-background-radius: 6; -fx-font-size: 13px; -fx-font-weight: bold; -fx-cursor: hand;" text="Confirm Reservation" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </bottom>
+
+</BorderPane>

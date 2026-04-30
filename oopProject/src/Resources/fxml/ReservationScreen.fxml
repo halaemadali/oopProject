@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f4f4f4;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.ReservationController">
+
+    <!-- ── TOP: Title bar ── -->
+    <top>
+        <VBox alignment="CENTER" style="-fx-background-color: #2c3e50;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="Make A Reservation" />
+                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #bdc3c7; -fx-font-size: 13px;" text="Fill in your preferences and find available rooms" />
+            </children>
+        </VBox>
+    </top>
+
+    <!-- ── CENTER: Form ── -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets bottom="20.0" left="100.0" right="100.0" top="40.0" />
+            </padding>
+            <children>
+
+                <!-- Room Type row -->
+                <HBox alignment="CENTER_LEFT" spacing="16.0">
+                    <children>
+                        <Label minWidth="130.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Room Type" />
+                        <ComboBox fx:id="roomTypeCombo" prefWidth="220.0" promptText="Select room type" />
+                    </children>
+                </HBox>
+
+                <Region prefHeight="16.0" />
+
+                <!-- View row -->
+                <HBox alignment="CENTER_LEFT" spacing="16.0">
+                    <children>
+                        <Label minWidth="130.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="View" />
+                        <ComboBox fx:id="viewCombo" prefWidth="220.0" promptText="Select preferred view" />
+                    </children>
+                </HBox>
+
+                <Region prefHeight="16.0" />
+
+                <!-- Separator -->
+                <Separator>
+                    <padding>
+                        <Insets bottom="4.0" top="4.0" />
+                    </padding>
+                </Separator>
+
+                <Region prefHeight="16.0" />
+
+                <!-- Check In row -->
+                <HBox alignment="CENTER_LEFT" spacing="16.0">
+                    <children>
+                        <Label minWidth="130.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Check-in Date" />
+                        <DatePicker fx:id="checkinPicker" prefWidth="220.0" promptText="Select date" />
+                    </children>
+                </HBox>
+
+                <Region prefHeight="16.0" />
+
+                <!-- Check Out row -->
+                <HBox alignment="CENTER_LEFT" spacing="16.0">
+                    <children>
+                        <Label minWidth="130.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Check-out Date" />
+                        <DatePicker fx:id="checkoutPicker" prefWidth="220.0" promptText="Select date" />
+                    </children>
+                </HBox>
+
+                <Region prefHeight="30.0" />
+
+                <!-- Search button -->
+                <HBox alignment="CENTER">
+                    <children>
+                        <Button fx:id="searchButton" onAction="#handleSearch" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #2c3e50; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-background-radius: 6; -fx-cursor: hand;" text="Search Available Rooms" />
+                    </children>
+                </HBox>
+
+                <Region prefHeight="16.0" />
+
+                <!-- Status label — shows errors -->
+                <Label fx:id="statusLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #e74c3c; -fx-font-size: 13px;" text="" textFill="#fd0909" />
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -150,6 +150,9 @@ public class HotelDatabase {
         LocalDate in = LocalDate.now().plusDays(1 + rand.nextInt(10));
         LocalDate out = in.plusDays(1 + rand.nextInt(5));
 
+        // Only create reservation if room is actually free
+        if (!r.checkAvailabilityPeriod(in, out)) continue; // ← add this line
+
         Reservation res = new Reservation(r, g, in, out);
         g.getReservations().add(res);
 
@@ -161,7 +164,7 @@ public class HotelDatabase {
         res.setStatus(statuses[rand.nextInt(statuses.length)]);
 
       } catch (Exception e) {
-        e.printStackTrace();
+        // skip this one silently
       }
     }
   }
