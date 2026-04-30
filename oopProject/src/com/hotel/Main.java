@@ -31,8 +31,13 @@ public class Main extends Application {
         ReservationController ctrl = loader.getController();
         ctrl.setGuest(testGuest);
 
+        // ── NEW: Load Login screen as the entry point ──────────────────────
+        Parent loginRoot = FXMLLoader.load(
+                getClass().getResource("/Resources/fxml/LoginScreen.fxml")
+        );
+
         // 5. Show the window
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(loginRoot));
         stage.setTitle("Hotel Reservation System");
         stage.show();
     }
