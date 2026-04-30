@@ -98,7 +98,7 @@ public class LoginController implements Initializable {
     }
 
     private void showError(String message) {
-        loginStatusLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 13px;");
+        loginStatusLabel.setStyle("-fx-text-fill: #e76c3c; -fx-font-size: 13px;");
         loginStatusLabel.setText(message);
     }
 
