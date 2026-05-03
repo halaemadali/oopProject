@@ -7,21 +7,59 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.RegisterController">
+<AnchorPane  prefHeight="550.0" prefWidth="700.0"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hotel.controllers.RegisterController"
+            style="-fx-background-color: #f0f4f8;">
+
+   <stylesheets>
+      <URL value="@styles.css"/>
+   </stylesheets>
+
    <children>
-      <AnchorPane layoutX="-7.0" layoutY="-2.0" prefHeight="400.0" prefWidth="614.0">
+      <AnchorPane layoutX="0.0" layoutY="0.0" prefHeight="550.0" prefWidth="700.0">
          <children>
-            <TextField fx:id="regUsernameField" layoutX="24.0" layoutY="28.0" />
-            <TextField fx:id="regBalanceField" layoutX="25.0" layoutY="244.0" />
-            <TextField fx:id="regAddressField" layoutX="24.0" layoutY="163.0" />
-            <PasswordField fx:id="regPasswordField" layoutX="24.0" layoutY="74.0" />
-            <PasswordField fx:id="regConfirmPasswordField" layoutX="233.0" layoutY="74.0" />
-            <DatePicker fx:id="regDobPicker" layoutX="25.0" layoutY="109.0" />
-            <ComboBox fx:id="regGenderCombo" layoutX="24.0" layoutY="200.0" prefWidth="150.0" />
-            <Label fx:id="regStatusLabel" layoutX="71.0" layoutY="278.0" text="Label" />
-            <Button fx:id="Register" layoutX="122.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleRegister" text="Register" />
-            <Button fx:id="BackToLogin" layoutX="417.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleBackToLogin" text="Back to Login" />
+
+            <!-- Title -->
+            <Label text="Create Account" styleClass="title-label"
+                   layoutX="130.0" layoutY="20.0"/>
+
+            <!-- Username -->
+            <TextField fx:id="regUsernameField" layoutX="30.0" layoutY="100.0" prefWidth="640.0"/>
+
+            <!-- Password labels -->
+            <Label text="Password" styleClass="field-label" layoutX="30.0" layoutY="145.0"/>
+            <Label text="Confirm Password" styleClass="field-label" layoutX="355.0" layoutY="145.0"/>
+
+            <!-- Password fields -->
+            <PasswordField fx:id="regPasswordField" layoutX="30.0" layoutY="165.0" prefWidth="305.0"/>
+            <PasswordField fx:id="regConfirmPasswordField" layoutX="355.0" layoutY="165.0" prefWidth="315.0"/>
+
+            <!-- DOB + Gender labels -->
+            <Label text="Date of Birth" styleClass="field-label" layoutX="30.0" layoutY="210.0"/>
+            <Label text="Gender" styleClass="field-label" layoutX="355.0" layoutY="210.0"/>
+
+            <!-- DOB + Gender fields -->
+            <DatePicker fx:id="regDobPicker" layoutX="30.0" layoutY="230.0" prefWidth="305.0"/>
+            <ComboBox fx:id="regGenderCombo" layoutX="355.0" layoutY="230.0" prefWidth="315.0"/>
+
+            <!-- Address + Balance labels -->
+            <Label text="Address" styleClass="field-label" layoutX="30.0" layoutY="275.0"/>
+            <Label text="Initial Balance ($)" styleClass="field-label" layoutX="355.0" layoutY="275.0"/>
+
+            <!-- Address + Balance fields -->
+            <TextField fx:id="regAddressField" layoutX="30.0" layoutY="295.0" prefWidth="305.0"/>
+            <TextField fx:id="regBalanceField" layoutX="355.0" layoutY="295.0" prefWidth="315.0"/>
+
+            <!-- Status -->
+            <Label fx:id="regStatusLabel" text="" layoutX="30.0" layoutY="345.0"/>
+
+            <!-- Buttons -->
+            <Button text="Register" styleClass="btn-main" onAction="#handleRegister" layoutX="30.0" layoutY="400.0" prefWidth="305.0"/>
+            <Button text="← Back to Login" styleClass="btn-secondary" onAction="#handleBackToLogin" layoutX="355.0" layoutY="400.0" prefWidth="315.0"/>
          </children>
       </AnchorPane>
    </children>
