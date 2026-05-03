@@ -8,12 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<?import java.net.URL?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.RegisterController">
-    <stylesheets>
-        <URL value="@styles.css"/>
-    </stylesheets>
    <children>
       <AnchorPane layoutX="-7.0" layoutY="-2.0" prefHeight="400.0" prefWidth="614.0">
          <children>
@@ -25,8 +20,8 @@
             <DatePicker fx:id="regDobPicker" layoutX="25.0" layoutY="109.0" />
             <ComboBox fx:id="regGenderCombo" layoutX="24.0" layoutY="200.0" prefWidth="150.0" />
             <Label fx:id="regStatusLabel" layoutX="71.0" layoutY="278.0" text="Label" />
-            <Button fx:id="handleRegister" layoutX="122.0" layoutY="321.0" mnemonicParsing="false" text="Register" />
-            <Button fx:id="handleBackToLogin" layoutX="417.0" layoutY="334.0" mnemonicParsing="false" text="Back to Login" />
+            <Button fx:id="Register" layoutX="122.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleRegister" text="Register" />
+            <Button fx:id="BackToLogin" layoutX="417.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleBackToLogin" text="Back to Login" />
          </children>
       </AnchorPane>
    </children>
