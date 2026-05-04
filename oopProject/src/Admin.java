@@ -415,8 +415,8 @@ public class Admin extends Staff {
     }
 
     // add receptionist account to system
-    public void addReceptionist(String Username, String Password, LocalDate bday, int workinghours) throws InvalidUsernameException{
-        Receptionist r = new Receptionist(username, password,bday, workinghours);
+    public void addReceptionist(String Username, String Password, LocalDate bday, int workinghours) throws InvalidUsernameException {
+        Receptionist r = new Receptionist(Username, Password, bday, workinghours); // ← correct
         HotelDatabase.receptionists.add(r);
     }
 
