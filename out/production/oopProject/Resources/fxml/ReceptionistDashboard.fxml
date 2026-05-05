@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+
+<BorderPane prefHeight="650.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/26"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.hotel.controllers.ReceptionistDashboardController"
+            style="-fx-background-color: #f0f4f8;">
+
+    <stylesheets>
+        <URL value="@styles.css"/>
+    </stylesheets>
+
+    <!-- ══════════════════ TOP HEADER ══════════════════ -->
+    <top>
+        <VBox style="-fx-background-color: #2c2c2c;" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="16.0" right="24.0" bottom="16.0" left="24.0"/>
+            </padding>
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="12.0">
+                    <children>
+                        <VBox spacing="2.0">
+                            <children>
+                                <Label text="🏨  Receptionist Dashboard"
+                                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                                <Label text="Hotel Management System"
+                                       style="-fx-font-size: 12px; -fx-text-fill: #aaaaaa;"/>
+                            </children>
+                        </VBox>
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <VBox alignment="CENTER_RIGHT" spacing="2.0">
+                            <children>
+                                <Label text="Logged in as:"
+                                       style="-fx-font-size: 11px; -fx-text-fill: #aaaaaa;"/>
+                                <Label fx:id="lblReceptionist"
+                                       text="—"
+                                       style="-fx-font-size: 14px; -fx-text-fill: #e06d67; -fx-font-weight: bold;"/>
+                            </children>
+                        </VBox>
+
+                        <Button text="Logout"
+                                styleClass="btn-secondary"
+                                onAction="#handleLogout"
+                                prefHeight="34.0"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+
+    <!-- ══════════════════ LEFT SIDEBAR — Actions ══════════════════ -->
+    <left>
+        <VBox prefWidth="210.0" spacing="10.0"
+              style="-fx-background-color: white;
+                     -fx-border-color: #e0e0e0;
+                     -fx-border-width: 0 1 0 0;">
+            <padding>
+                <Insets top="24.0" right="16.0" bottom="24.0" left="16.0"/>
+            </padding>
+            <children>
+
+                <Label text="ACTIONS"
+                       style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #aaaaaa;"/>
+                <Separator/>
+
+                <Button text="📋  All Reservations"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-secondary"
+                        onAction="#handleViewAll"/>
+
+                <Button text="⏳  Pending Reservations"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-secondary"
+                        onAction="#handleViewPending"/>
+
+                <Button text="✅  Confirm Reservation"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-main"
+                        onAction="#handleConfirm"/>
+
+                <Button text="❌  Cancel Reservation"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-secondary"
+                        onAction="#handleCancel"/>
+
+                <Separator/>
+
+                <Button text="🛎  Check In Guest"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-main"
+                        onAction="#handleCheckIn"/>
+
+                <Button text="🚪  Process Checkout"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-main"
+                        onAction="#handleCheckout"/>
+
+                <Separator/>
+
+                <Button text="👥  View All Guests"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-secondary"
+                        onAction="#handleViewGuests"/>
+
+                <Button text="🏠  View All Rooms"
+                        maxWidth="Infinity" prefHeight="38.0"
+                        styleClass="btn-secondary"
+                        onAction="#handleViewRooms"/>
+
+            </children>
+        </VBox>
+    </left>
+
+    <!-- ══════════════════ CENTER — Main content ══════════════════ -->
+    <center>
+        <VBox spacing="14.0" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+            </padding>
+            <children>
+
+                <!-- ── Input row ── -->
+                <HBox spacing="12.0" alignment="CENTER_LEFT">
+                    <children>
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Reservation ID" styleClass="field-label"/>
+                                <TextField fx:id="reservationIdField"
+                                           promptText="e.g. 5"
+                                           prefWidth="130.0"
+                                           styleClass="input-field"/>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Guest Username" styleClass="field-label"/>
+                                <TextField fx:id="guestUsernameField"
+                                           promptText="e.g. ali_hassan_3"
+                                           prefWidth="200.0"
+                                           styleClass="input-field"/>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Room Number" styleClass="field-label"/>
+                                <TextField fx:id="roomNumberField"
+                                           promptText="e.g. 105"
+                                           prefWidth="130.0"
+                                           styleClass="input-field"/>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="4.0">
+                            <children>
+                                <Label text="Payment Method" styleClass="field-label"/>
+                                <ComboBox fx:id="paymentCombo"
+                                          prefWidth="150.0"
+                                          promptText="Select method"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- ── Status message ── -->
+                <Label fx:id="statusLabel"
+                       text=""
+                       wrapText="true"
+                       maxWidth="Infinity"
+                       style="-fx-font-size: 13px; -fx-text-fill: #e74c3c;"/>
+
+                <Separator/>
+
+                <!-- ── Reservations table ── -->
+                <Label text="Reservations"
+                       style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #2c2c2c;"/>
+
+                <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS"
+                           style="-fx-border-color: #e0e0e0; -fx-border-radius: 6; -fx-background-radius: 6;">
+                    <columns>
+                        <TableColumn fx:id="colID"       text="ID"         prefWidth="55.0"/>
+                        <TableColumn fx:id="colGuest"    text="Guest"      prefWidth="150.0"/>
+                        <TableColumn fx:id="colRoom"     text="Room"       prefWidth="70.0"/>
+                        <TableColumn fx:id="colCheckin"  text="Check-In"   prefWidth="105.0"/>
+                        <TableColumn fx:id="colCheckout" text="Check-Out"  prefWidth="105.0"/>
+                        <TableColumn fx:id="colStatus"   text="Status"     prefWidth="120.0"/>
+                        <TableColumn fx:id="colTotal"    text="Total ($)"  prefWidth="90.0"/>
+                    </columns>
+                </TableView>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

@@ -38,6 +38,7 @@ public class LoginController implements Initializable {
             return;
         }
 
+
         // Check Guests
         Guest guest = Guest.login(username, password);
         if (guest != null) {
@@ -57,8 +58,7 @@ public class LoginController implements Initializable {
         // Check Receptionists
         for (Receptionist r : HotelDatabase.receptionists) {
             if (r.getUsername().equals(username) && r.getPassword().equals(password)) {
-                showSuccess("Welcome Receptionist: " + username);
-                // TODO: goToReceptionistDashboard(r);
+                goToReceptionistDashboard(r);
                 return;
             }
         }
@@ -105,5 +105,23 @@ public class LoginController implements Initializable {
     private void showSuccess(String message) {
         loginStatusLabel.setStyle("-fx-text-fill: #27ae60; -fx-font-size: 13px;");
         loginStatusLabel.setText(message);
+    }
+    private void goToReceptionistDashboard(Receptionist receptionist) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/Resources/fxml/ReceptionistDashboard.fxml")
+            );
+            Parent root = loader.load();
+
+            ReceptionistDashboardController ctrl = loader.getController();
+            ctrl.setReceptionist(receptionist);
+
+            Stage stage = (Stage) loginUsernameField.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Receptionist Dashboard");
+
+        } catch (Exception e) {
+            showError("Navigation error: " + e.getMessage());
+        }
     }
 }
