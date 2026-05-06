@@ -1,6 +1,5 @@
 package com.hotel.controllers;
 
-import com.hotel.enums.ReservationStatus;
 import com.hotel.models.Guest;
 import com.hotel.models.Reservation;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,46 +14,20 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class CancelReservationController implements Initializable {
-    @FXML private TableView<Reservation> cancelTable;
-    @FXML private Label welcomeLabel;
-    @FXML private Label statusLabel;
+public class GuestManageReservationController implements Initializable {
+    @FXML
+    private Label welcomeLabel;                          // fx:id="welcomeLabel"
+    @FXML private TableView<Reservation> ReservationsTable;    // fx:id="ReservationsTable"
     @FXML private TableColumn<Reservation, String> colId;      // fx:id="colId"
     @FXML private TableColumn<Reservation, String> colRoom;    // fx:id="colRoom"
     @FXML private TableColumn<Reservation, String> colType;    // fx:id="colType"
     @FXML private TableColumn<Reservation, String> colCheckin; // fx:id="colCheckin"
     @FXML private TableColumn<Reservation, String> colCheckout;// fx:id="colCheckout"
     @FXML private TableColumn<Reservation, String> colStatus;  // fx:id="colStatus"
-    private Guest currentGuest ;
 
-    public Guest getGuest(){
-        return currentGuest;
-    }
-    public void setGuest(Guest g) {
-        this.currentGuest = g;
-        welcomeLabel.setText("Welcome,  " + g.getUsername());
-
-        List<Reservation> cancellable = new ArrayList<>();
-        for (Reservation r : g.getReservations()) {
-            if (r.getStatus() == ReservationStatus.PENDING ||
-                    r.getStatus() == ReservationStatus.CONFIRMED) {
-                cancellable.add(r);
-            }
-        }
-
-        if (cancellable.isEmpty()) {
-            statusLabel.setText(
-                    "You have no active reservations to cancel.");
-        } else {
-            cancelTable.getItems().setAll(cancellable);
-        }
-    }
-
-
+    private Guest currentGuest;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -81,32 +54,42 @@ public class CancelReservationController implements Initializable {
         colStatus.setCellValueFactory(c ->
                 new SimpleStringProperty(
                         String.valueOf(c.getValue().getStatus())));
-
     }
 
-    public void handleConfirmCancel(){
-        Reservation selected = cancelTable.getSelectionModel().getSelectedItem();
+    public void setGuest(Guest g) {
+        this.currentGuest = g;
+        welcomeLabel.setText("Welcome,  " + g.getUsername());
+        refreshTable();
+    }
 
-        if(selected == null){
-            statusLabel.setText("Please Choose a Reservation to cancel");
-            return;
-        }
-
-        currentGuest.cancelReservation(selected.getRoom().getRoomNumber());
-        cancelTable.getItems().remove(selected);
-        statusLabel.setStyle("-fx-text-fill: #27ae60; -fx-font-size: 13px;");
-        statusLabel.setText("Reservation cancelled successfully.");
+    private void refreshTable() {
+        ReservationsTable.getItems().setAll(currentGuest.getReservations());
     }
 
     @FXML
-    private void handleBack() throws Exception {
+    private void handleGoToCancel() throws Exception {
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource(
-                        "/Resources/fxml/ReservationManagerScreen.fxml"));
+                getClass().getResource("/Resources/fxml/CancelReservationScreen.fxml"));
         Parent root = loader.load();
-        GuestManageReservationController prev = loader.getController();
-        prev.setGuest(currentGuest);
-        ((Stage) statusLabel.getScene().getWindow())
+        CancelReservationController next = loader.getController();
+        next.setGuest(currentGuest);
+        ((Stage) welcomeLabel.getScene().getWindow())
                 .setScene(new Scene(root));
+    }
+
+@FXML
+    private void handleMakeReservation() throws Exception {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/Resources/fxml/ReservationScreen.fxml"));
+        Parent root = loader.load();
+        ReservationController next = loader.getController();
+        next.setGuest(currentGuest);
+        ((Stage) welcomeLabel.getScene().getWindow())
+                .setScene(new Scene(root));
+    }
+    @FXML
+    private void handleBack() {
+        // placeholder until main menu is built
+        System.out.println("Main menu not built yet");
     }
 }

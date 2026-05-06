@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane fx:id="WelcomeLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.ManageReservationController">
    <top>
       <VBox prefHeight="95.0" prefWidth="800.0" style="-fx-background-color: #2c3e50;" BorderPane.alignment="CENTER">
@@ -20,7 +19,7 @@
                   <Font name="System Bold" size="34.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Welcome" textFill="#bdc3c7">
+            <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Welcome" textFill="#bdc3c7">
                <font>
                   <Font name="System Italic" size="22.0" />
                </font>
