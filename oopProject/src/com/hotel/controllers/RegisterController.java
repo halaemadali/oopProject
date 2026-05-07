@@ -21,6 +21,9 @@ public class RegisterController implements Initializable {
     @FXML private TextField        regUsernameField;
     @FXML private PasswordField    regPasswordField;
     @FXML private PasswordField    regConfirmPasswordField;
+    @FXML private TextField        regPasswordVisible;
+    @FXML private TextField        regConfirmPasswordVisible;
+    @FXML private CheckBox         showPasswordCheck;
     @FXML private DatePicker       regDobPicker;
     @FXML private TextField        regAddressField;
     @FXML private ComboBox<Gender> regGenderCombo;
@@ -33,10 +36,37 @@ public class RegisterController implements Initializable {
     }
 
     @FXML
+    private void handleShowPassword() {
+        if (showPasswordCheck.isSelected()) {
+            regPasswordVisible.setText(regPasswordField.getText());
+            regConfirmPasswordVisible.setText(regConfirmPasswordField.getText());
+            regPasswordVisible.setVisible(true);
+            regConfirmPasswordVisible.setVisible(true);
+            regPasswordField.setVisible(false);
+            regConfirmPasswordField.setVisible(false);
+        } else {
+            regPasswordField.setText(regPasswordVisible.getText());
+            regConfirmPasswordField.setText(regConfirmPasswordVisible.getText());
+            regPasswordField.setVisible(true);
+            regConfirmPasswordField.setVisible(true);
+            regPasswordVisible.setVisible(false);
+            regConfirmPasswordVisible.setVisible(false);
+        }
+    }
+
+    @FXML
     private void handleRegister() {
         String username   = regUsernameField.getText().trim();
-        String password   = regPasswordField.getText().trim();
-        String confirm    = regConfirmPasswordField.getText().trim();
+
+        // Get password from whichever field is visible
+        String password = regPasswordField.isVisible()
+                ? regPasswordField.getText().trim()
+                : regPasswordVisible.getText().trim();
+
+        String confirm = regConfirmPasswordField.isVisible()
+                ? regConfirmPasswordField.getText().trim()
+                : regConfirmPasswordVisible.getText().trim();
+
         String address    = regAddressField.getText().trim();
         String balanceTxt = regBalanceField.getText().trim();
         LocalDate dob     = regDobPicker.getValue();
