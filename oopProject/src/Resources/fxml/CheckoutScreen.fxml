@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f0f4f8;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.CheckoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.CheckoutController">
     <top>
-        <VBox prefHeight="97.0" prefWidth="800.0" style="-fx-background-color: white; -fx-border-color: #e06d67; -fx-border-width: 0 0 0 10; -fx-border-radius: 2;" BorderPane.alignment="CENTER">
+        <VBox prefHeight="97.0" prefWidth="800.0" style="-fx-background-color: #16213e;" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
             </padding>
@@ -27,14 +27,14 @@
                     <children>
                         <VBox prefHeight="61.0" prefWidth="206.0" spacing="2.0">
                             <children>
-                                <Label prefHeight="38.0" prefWidth="194.0" style="-fx-font-weight: BOLD; -fx-font-size: 26px; -fx-text-fill: black;" text="CHECK OUT">
+                                <Label prefHeight="32.0" prefWidth="138.0" style="-fx-font-weight: BOLD; -fx-font-size: 22px; -fx-text-fill: #e2b96f;" text="CHECK OUT">
                                     <font>
                                         <Font size="22.0" />
                                     </font>
                                 </Label>
                                 <VBox prefHeight="26.0" prefWidth="182.0">
                                     <children>
-                                        <Label prefHeight="24.0" prefWidth="174.0" style="-fx-font-size: 12px; -fx-text-fill: #aaaaaa;" text="Hotel Management System" />
+                                        <Label prefHeight="24.0" prefWidth="174.0" style="-fx-font-size: 12px; -fx-text-fill: #8892a4;" text="Hotel Management System" />
                                     </children>
                                 </VBox>
                             </children>
@@ -42,8 +42,8 @@
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                         <VBox alignment="TOP_RIGHT" prefHeight="61.0" prefWidth="151.0" spacing="2.0">
                             <children>
-                                <Label prefHeight="25.0" prefWidth="150.0" style="-fx-font-size: 12px; -fx-text-fill: #aaaaaa;" text="Logged in as:" />
-                                <Label fx:id="lblUsername" prefHeight="20.0" prefWidth="105.0" style="-fx-font-size: 13px; -fx-text-fill: #e06d67; -fx-font-weight: bold;" text="Username" />
+                                <Label prefHeight="25.0" prefWidth="150.0" style="-fx-font-size: 11px; -fx-text-fill: #8892a4;" text="Logged in as:" />
+                                <Label fx:id="lblUsername" prefHeight="20.0" prefWidth="105.0" style="-fx-font-size: 14px; -fx-text-fill: #e2b96f;" text="Username" />
                             </children>
                         </VBox>
                     </children>
@@ -52,84 +52,78 @@
         </VBox>
     </top>
     <center>
-        <HBox alignment="TOP_CENTER" prefHeight="502.0" prefWidth="477.0" spacing="20.0" BorderPane.alignment="CENTER">
+        <HBox alignment="TOP_CENTER" prefHeight="502.0" prefWidth="590.0" spacing="20.0" BorderPane.alignment="CENTER">
             <padding>
                 <Insets bottom="22.0" left="22.0" right="22.0" top="22.0" />
             </padding>
             <children>
-                <VBox prefHeight="456.0" prefWidth="406.0" spacing="12.0" style="-fx-background-color: white; -fx-background-radius: 5;" HBox.hgrow="ALWAYS">
+                <VBox prefHeight="396.0" prefWidth="503.0" spacing="12.0" HBox.hgrow="ALWAYS">
                     <children>
-                  <HBox prefHeight="24.0" prefWidth="274.0" style="-fx-background-color: white; -fx-border-color: #e06d67; -fx-border-width: 0 0 0 5; -fx-border-radius: 3;">
-                     <children>
-                        <Label alignment="TOP_RIGHT" style="-fx-font-weight: bold; -fx-font-size: 15px;" text=" Checked-In Reservations" />
-                     </children>
-                  </HBox>
-                        <TableView fx:id="reservationsTable" prefHeight="244.0" style="fx-background-color: #16213e; -fx-border-color: #2a3a5e; -fx-border-radius: 6; -fx-background-radius: 4; -fx-font-size: 13px; -fx-table-cell-border: #eeeeee;" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="reservationsTable" prefHeight="244.0" prefWidth="573.0" style="fx-background-color: #16213e; -fx-border-color: #2a3a5e; -fx-border-radius: 6; -fx-background-radius: 4;">
                             <columns>
-                                <TableColumn fx:id="colID" minWidth="0.0" prefWidth="55.0" text="ID" />
-                                <TableColumn fx:id="colRoom" minWidth="0.0" prefWidth="90.0" text="Room No." />
-                                <TableColumn fx:id="colCheckin" minWidth="0.0" prefWidth="110.0" text="Check-In" />
-                                <TableColumn fx:id="colCheckout" minWidth="0.0" prefWidth="110.0" text="Check-Out" />
-                                <TableColumn fx:id="colStatus" minWidth="0.0" prefWidth="120.0" text="Status" />
-                                <TableColumn fx:id="colTotal" minWidth="0.0" prefWidth="110.0" text="Total ($)" />
+                                <TableColumn fx:id="colID" prefWidth="55.0" text="ID" />
+                                <TableColumn fx:id="colRoom" prefWidth="85.0" text="Room No." />
+                                <TableColumn fx:id="colCheckin" prefWidth="110.0" text="Check-In" />
+                                <TableColumn fx:id="colCheckout" prefWidth="110.0" text="Check-Out" />
+                                <TableColumn fx:id="colStatus" prefWidth="120.0" text="Status" />
+                                <TableColumn fx:id="colTotal" minWidth="0.0" prefWidth="88.79996948242183" text="Total ($)" />
                             </columns>
                         </TableView>
-                  <Label fx:id="statusLabel" alignment="CENTER" prefHeight="44.0" prefWidth="594.0" style="-fx-font-size: 13px; -fx-text-fill: #e74c3c;" wrapText="true" />
+                  <Label fx:id="statusLabel" text="Label" />
                     </children>
                 </VBox>
             </children>
         </HBox>
     </center>
     <right>
-        <VBox minWidth="-Infinity" prefHeight="502.0" prefWidth="182.0" spacing="14.0" style="-fx-background-color: #f8f9fa; -fx-border-color: #eeeeee; -fx-border-width: 0 0 0 1;" BorderPane.alignment="CENTER">
+        <VBox prefHeight="502.0" prefWidth="182.0" BorderPane.alignment="CENTER">
             <children>
-            <HBox prefHeight="30.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: #e06d67; -fx-border-width: 0 0 0 5; -fx-border-radius: 3;">
-               <children>
-                      <Label prefHeight="34.0" prefWidth="177.0" style="-fx-font-weight: bold; -fx-font-size: 15px;" text=" CHECKOUT DETAILS" />
-               </children>
-            </HBox>
+                <Label text="CHECKOUT DETAILS" />
                 <Separator prefWidth="200.0" />
-                <VBox prefHeight="126.0" prefWidth="151.0" spacing="5.0">
-               <children>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                    <children>
                         <Label text="Room Number" />
-                  <ComboBox fx:id="cmbRoomNumber" prefHeight="36.0" prefWidth="200.0" />
-                          <Label prefHeight="0.0" prefWidth="118.0" text="Payment Method" />
-                          <ComboBox fx:id="cmbPayment" prefHeight="36.0" prefWidth="200.0" />
-               </children>
+                  <ComboBox fx:id="cmbRoomNumber" prefWidth="150.0" />
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <Label text="Payment Method" />
+                                <ComboBox fx:id="cmbPayment" prefWidth="150.0" />
+                                <Separator prefWidth="200.0" />
+                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <padding>
+                                        <Insets bottom="12.0" left="14.0" right="14.0" top="12.0" />
+                                    </padding>
+                                    <children>
+                                        <Label text="PAYMENT SUMMARY" />
+                                        <HBox prefHeight="100.0" prefWidth="200.0">
+                                            <children>
+                                                <Label text="Room Total:" />
+                                            </children>
+                                        </HBox>
+                                        <Label fx:id="lblRoomTotal" text="\$ --" />
+                                        <Region prefHeight="200.0" prefWidth="200.0" />
+                                        <Label text="Amenities:" />
+                                        <Label fx:id="lblAmenities" text="\$ --" />
+                                        <Separator prefWidth="200.0" />
+                                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                                        <Label text="TOTAL DUE:" />
+                                        <Label fx:id="lblTotalDue" text="\$--" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </children>
                 </VBox>
-            <VBox maxWidth="-Infinity" prefHeight="120.0" prefWidth="151.0" style="-fx-background-color: #fff8f8; -fx-background-radius: 8; -fx-border-color: #f5c6c4; -fx-border-radius: 2;">
-               <children>
-                            <Label style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #e06d67;" text="PAYMENT SUMMARY" />
-                              <Label style="-fx-font-size: 12px; -fx-text-fill: #888888;" text="Room Total:" />
-                            <Label fx:id="lblRoomTotal" style="-fx-font-size: 12px; -fx-text-fill: #333333; -fx-font-weight: bold;" text="\$ --" />
-                            <Label style="-fx-font-size: 12px; -fx-text-fill: #888888;" text="Amenities:" />
-                            <Label fx:id="lblAmenities" style="-fx-font-size: 12px; -fx-text-fill: #333333; -fx-font-weight: bold;" text="\$ --" />
-                            <Separator prefHeight="2.0" prefWidth="174.0" />
-                            <Label style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #e06d67;" text="TOTAL DUE:" />
-                            <Label fx:id="lblTotalDue" style="-fx-font-size: 12px; -fx-text-fill: #333333; -fx-font-weight: bold;" text="\$--" />
-                  <Region prefHeight="200.0" prefWidth="200.0" />
-               </children>
-            </VBox>
-            <HBox maxWidth="-Infinity" prefHeight="35.0" prefWidth="164.0" style="-fx-background-color: #f0f9f0; -fx-background-radius: 6; -fx-border-color: #c3e6cb; -fx-border-radius: 6;">
-               <children>
-                        <Label prefHeight="18.0" prefWidth="86.0" style="-fx-text-fill: #27ae60; -fx-font-weight: bold;" text="Your Balance:" />
-                        <Label fx:id="lblBalance" prefHeight="18.0" prefWidth="61.0" style="-fx-text-fill: #27ae60; -fx-font-weight: bold;" text="\$ --" />
-               </children>
-               <padding>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-               </padding>
-            </HBox>
-            <VBox prefHeight="79.0" prefWidth="182.0">
-               <children>
-                      <Button fx:id="btnCheckOut" mnemonicParsing="false" onAction="#handleCheckOut" prefHeight="34.0" prefWidth="138.0" style="-fx-background-color: #e06d67; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" text="Confirm Checkout" />
-                  <Region prefHeight="12.0" prefWidth="182.0" />
-                      <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBack" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: transparent; -fx-text-fill: #e06d67; -fx-border-color: #e06d67; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 13px;" text="Back to Menu" />
-               </children>
-            </VBox>
+                <HBox prefHeight="14.0" prefWidth="182.0">
+                    <children>
+                        <Label text="Your Balance:" />
+                        <Label fx:id="lblBalance" text="\$ --" />
+                    </children>
+                </HBox>
+                <Button fx:id="btnCheckOut" mnemonicParsing="false" onAction="#handleCheckOut" text="Confirm Checkout" />
+                <Button fx:id="btnBack" mnemonicParsing="false" onAction="#handleBack" text="Back to Menu" />
+                <Region prefHeight="200.0" prefWidth="200.0" />
             </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
         </VBox>
     </right>
 </BorderPane>

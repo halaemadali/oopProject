@@ -77,7 +77,7 @@ public class GuestManageReservationController implements Initializable {
                 .setScene(new Scene(root));
     }
 
-@FXML
+    @FXML
     private void handleMakeReservation() throws Exception {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/Resources/fxml/ReservationScreen.fxml"));
