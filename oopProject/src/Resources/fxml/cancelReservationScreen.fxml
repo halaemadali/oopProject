@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="620" prefWidth="900"
-            xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.hotel.controllers.CancelReservationController"
-            style="-fx-background-color:#f4f4f4;">
+<BorderPane prefHeight="620" prefWidth="900" style="-fx-background-color:#f4f4f4;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hotel.controllers.CancelReservationController">
 
     <!-- TOP HEADER -->
     <top>
-        <VBox alignment="CENTER" spacing="6"
-              style="-fx-background-color:#2c3e50;">
+        <VBox alignment="CENTER" prefHeight="77.0" prefWidth="900.0" spacing="6" style="-fx-background-color:#2c3e50;">
             <padding>
-                <Insets top="20" bottom="20" left="20" right="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
 
-            <Label text="Cancel a Reservation"
-                   style="-fx-text-fill:white; -fx-font-size:28px; -fx-font-weight:bold;"
-                   alignment="CENTER" maxWidth="Infinity"/>
+            <Label alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill:white; -fx-font-size:28px; -fx-font-weight:bold;" text="Cancel a Reservation" />
 
-            <Label fx:id="welcomeLabel"
-                   text=""
-                   style="-fx-text-fill:#bdc3c7; -fx-font-size:13px;"
-                   alignment="CENTER" maxWidth="Infinity"/>
+            <Label fx:id="welcomeLabel" alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill:#bdc3c7; -fx-font-size:13px;" text="" />
         </VBox>
     </top>
 
@@ -33,50 +28,36 @@
     <center>
         <VBox spacing="12">
             <padding>
-                <Insets top="20" bottom="20" left="20" right="20"/>
+                <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
 
-            <Label text="Select a reservation to cancel"
-                   style="-fx-font-size:14px; -fx-font-weight:bold; -fx-text-fill:#2c3e50;"/>
+            <Label style="-fx-font-size:14px; -fx-font-weight:bold; -fx-text-fill:#2c3e50;" text="Select a reservation to cancel" />
 
             <TableView fx:id="cancelTable" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
-                    <TableColumn fx:id="colRoom" text="Room No." prefWidth="90"/>
-                    <TableColumn fx:id="colType" text="Type" prefWidth="100"/>
-                    <TableColumn fx:id="colCheckin" text="Check-in" prefWidth="120"/>
-                    <TableColumn fx:id="colCheckout" text="Check-out" prefWidth="120"/>
-                    <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+                    <TableColumn fx:id="colId" prefWidth="50" text="ID" />
+                    <TableColumn fx:id="colRoom" prefWidth="90" text="Room No." />
+                    <TableColumn fx:id="colType" prefWidth="100" text="Type" />
+                    <TableColumn fx:id="colCheckin" prefWidth="120" text="Check-in" />
+                    <TableColumn fx:id="colCheckout" prefWidth="120" text="Check-out" />
+                    <TableColumn fx:id="colStatus" prefWidth="120" text="Status" />
                 </columns>
             </TableView>
 
-            <Label fx:id="statusLabel"
-                   text=""
-                   style="-fx-text-fill:#e74c3c; -fx-font-size:13px;"
-                   alignment="CENTER" maxWidth="Infinity"/>
+            <Label fx:id="statusLabel" alignment="CENTER" maxWidth="Infinity" style="-fx-text-fill:#e74c3c; -fx-font-size:13px;" text="" />
         </VBox>
     </center>
 
     <!-- BOTTOM BUTTONS -->
     <bottom>
-        <HBox alignment="CENTER" spacing="16"
-              style="-fx-background-color:#ecf0f1; -fx-border-color:#bdc3c7; -fx-border-width:1 0 0 0;">
+        <HBox alignment="CENTER" spacing="16" style="-fx-background-color:#ecf0f1; -fx-border-color:#bdc3c7; -fx-border-width:1 0 0 0;">
             <padding>
-                <Insets top="15" bottom="15" left="15" right="15"/>
+                <Insets bottom="15" left="15" right="15" top="15" />
             </padding>
 
-            <Button text="← Back"
-                    onAction="#handleBack"
-                    prefWidth="160" prefHeight="38"
-                    style="-fx-background-color:white; -fx-border-color:#2c3e50;
-                           -fx-border-width:1.5; -fx-border-radius:6;
-                           -fx-background-radius:6; -fx-cursor:hand;"/>
+            <Button onAction="#handleBack" prefHeight="38" prefWidth="160" style="-fx-background-color:white; -fx-border-color:#2c3e50;                            -fx-border-width:1.5; -fx-border-radius:6;                            -fx-background-radius:6; -fx-cursor:hand;" text="← Back" />
 
-            <Button text="Confirm Cancel"
-                    onAction="#handleConfirmCancel"
-                    prefWidth="200" prefHeight="38"
-                    style="-fx-background-color:#c0392b; -fx-text-fill:white;
-                           -fx-font-weight:bold; -fx-background-radius:6; -fx-cursor:hand;"/>
+            <Button onAction="#handleConfirmCancel" prefHeight="38" prefWidth="200" style="-fx-background-color:#c0392b; -fx-text-fill:white;                            -fx-font-weight:bold; -fx-background-radius:6; -fx-cursor:hand;" text="Confirm Cancel" />
         </HBox>
     </bottom>
 

@@ -74,7 +74,7 @@ public class Invoice implements Payable {
     public double calculateTotal() {
         if (reservation == null || reservation.getRoom() == null)
             return 0;
-        return reservation.getDuration() * reservation.getRoom().getPrice();
+        return reservation.getDuration() * reservation.getRoom().calculateRoomPrice();
     }
 
     @Override
