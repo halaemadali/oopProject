@@ -145,8 +145,7 @@ public class CheckoutController implements Initializable {
 
 
 
-        double roomTotal = selectedReservation.getRoom().getPrice()
-                * selectedReservation.getDuration();
+        double roomTotal = selectedReservation.getInvoice().calculateTotal();
 
 
         double amenitiesTotal = 0;
