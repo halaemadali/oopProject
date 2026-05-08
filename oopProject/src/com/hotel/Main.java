@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -26,6 +27,7 @@ public class Main extends Application {
             // 3. Set up the stage
             stage.setScene(new Scene(root));
             stage.setTitle("Hotel Management System - Login");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/Resources/images/Hotel_Logo.png")));
 
             // Optional: Prevent the window from being too small
             stage.setResizable(false);

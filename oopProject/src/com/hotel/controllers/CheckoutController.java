@@ -219,6 +219,8 @@ public class CheckoutController implements Initializable {
                 getClass().getResource("/Resources/fxml/GuestDashboard.fxml")
         );
         Parent root = loader.load();
+        GuestDashboardController controller = loader.getController();
+        controller.setGuest(this.guest);
 
         Stage stage = (Stage) statusLabel.getScene().getWindow();
         stage.setScene(new Scene(root));
