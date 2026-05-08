@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
-import java.awt.*;
-
 public class WelcomeController {
 
     @FXML private Button btnGuestLogin;
@@ -25,7 +23,7 @@ public class WelcomeController {
 
     @FXML
     public void handleStaffLogin() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Resources/fxml/ReceptionistLoginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Resources/fxml/StaffLoginScreen.fxml"));
         Stage stage = (Stage) btnStaffLogin.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
