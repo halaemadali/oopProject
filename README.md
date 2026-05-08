@@ -1,44 +1,92 @@
 # oopProject
 # Hotel Reservation System
-### CSE241 Object-Oriented Programming
-**Ain Shams University — Faculty of Engineering**
-**2nd Semester 2025/2026**
+
+### CSE241 Object-Oriented Programming  
+**Ain Shams University — Faculty of Engineering**  
+**2nd Semester 2025/2026**  
 *Team 7*
 
 ---
 
 ## Project Overview
-A desktop Hotel Reservation System built in Java, applying 
-core OOP principles. This is Milestone 1 focusing on the 
-complete backend structure.
+
+A desktop Hotel Reservation System built in Java using JavaFX and SQLite, applying core Object-Oriented Programming principles and software design concepts.
+
+- **Milestone 1** focused on the complete backend implementation and OOP architecture.
+- **Milestone 2** introduced the graphical user interface (GUI), database integration using full system interaction through JavaFX.
+
+The system supports hotel reservation management for guests, receptionists, and administrators through separate dashboards and functionalities.
 
 ---
 
 ## Team Members
-| Name | Student ID | Contribution |
-|------|-----------|--------------|
-| Salma Khaled Shafek | 25p0196 | Reservation, Invoice |
-| Mariam MohamedRamzy | 25p0129 | Guest, HotelDateBase |
-| Hala Emad Ali Abdelkawy | 25p0130 | Room, RoomType, Amenity |
-| Sara Ahmed Mostafa ElNahass | 25p0013 | Staff, Admin, Receptionist |
-| Hagar Hossam El Deen Abd El Majeed | 25p0116 | Room, RoomType, Amenity |
+
+| Name | Student ID | Backend Contribution | Frontend / Milestone 2 Contribution |
+|------|-------------|----------------------|-------------------------------------|
+| Salma Khaled Shafek | 25p0196 | Reservation, Invoice | Reservation screens, Admin Dashboard |
+| Mariam Mohamed Ramzy | 25p0129 | Guest, HotelDatabase | Login and Register, CSS Styling |
+| Hala Emad Ali Abdelkawy | 25p0130 | Room, RoomType, Amenity | Receptionist Dashboard |
+| Sara Ahmed Mostafa ElNahass | 25p0013 | Staff, Admin, Receptionist | Check out and Welcome Screens |
+| Hagar Hossam El Deen Abd El Majeed | 25p0116 | Room, RoomType, Amenity | Guest Dashboard |
+
+---
+
+## Milestone 2 Features
+
+### GUI Features
+- JavaFX graphical interface
+- Multiple dashboards for:
+  - Guest
+  - Admin
+  - Receptionist
+- Scene navigation using FXML
+- Styled UI with CSS and responsive layouts
+- Background images and custom hotel branding
+
+
+### Authentication System
+- Login and registration system
+- Role-based access control
+- Session navigation between screens
 
 ---
 
 ## How to Run
-1. Clone the repository
-2. Open in IntelliJ IDEA
-3. Navigate to src/Main.java
-4. Right click Main.java → Run
 
-**Requirements:**
+1. Clone the repository
+2. Open the project in IntelliJ IDEA
+3. Make sure JavaFX SDK is configured
+4. Navigate to `src/com/hotel/Main.java`
+5. Right click `Main.java` → **Run**
+
+### Requirements
 - Java JDK 17 or higher
 - IntelliJ IDEA
+- JavaFX SDK
+
+---
 
 ## Project Structure
-  ---
+
+```text
+src/
+ ├── com.hotel.controllers
+ ├── com.hotel.database
+ ├── com.hotel.enums
+ ├── com.hotel.exceptions
+ ├── com.hotel.interfaces
+ ├── com.hotel.models
+ ├── Resources/
+ │    ├── fxml
+ │    ├── css
+ │    └── images
+ └── Main.java
+```
+
+---
 
 ## OOP Concepts Used
+
 - **Inheritance** — Admin and Receptionist extend Staff
 - **Abstraction** — Staff is an abstract class
 - **Encapsulation** — all fields are private with getters/setters
@@ -49,42 +97,62 @@ complete backend structure.
 ---
 
 ## Key Features
-**Guest:**
-- Register and login
-- Browse available rooms by type, view and dates
-- Make, view and cancel reservations
-- Select amenities for reservation
-- Checkout and pay invoice
 
-**Admin:**
-- Full CRUD on rooms, room types and amenities
+### Guest
+- Register and login
+- Browse available rooms by type, view, and dates
+- Make, view, and cancel reservations
+- Select amenities for reservations
+- Checkout and pay invoices
+
+### Admin
+- Full CRUD on rooms, room types, and amenities
 - Add amenities to rooms
 - Add receptionist accounts
+- Manage hotel data through GUI dashboards
 
-**Receptionist:**
-- View all guests, rooms and reservations
+### Receptionist
+- View all guests, rooms, and reservations
 - Confirm and cancel reservations
-- Check in and check out guests
+- Check-in and check-out guests
 - Process payments
 
 ---
 
 ## Pre-loaded Test Data
+
 The system launches with dummy data for immediate testing:
+
 - 29 guests
 - 130 rooms
 - 4 room types (Single, Double, Triple, Suite)
-- 5 amenities (WiFi, TV, Mini Bar, Air Conditioning, Room Service)
+- 5 amenities
+  - WiFi
+  - TV
+  - Mini Bar
+  - Air Conditioning
+  - Room Service
 - 2 admins
 - 2 receptionists
 - 40 reservations
 
-**Test Credentials:**
-- Admin: username = `admin1` password = `admin123`
-- Receptionist: username = `receptionist1` password = `recep123`
-- Guest: username = `hana_hassan_0` password = `pass00`
+---
+
+## Test Credentials
+
+### Admin
+- Username: `admin1`
+- Password: `admin123`
+
+### Receptionist
+- Username: `receptionist1`
+- Password: `recep123`
+
+### Guest
+- Username: `hana_hassan_0`
+- Password: `pass00`
 
 ---
 
----
+
 
