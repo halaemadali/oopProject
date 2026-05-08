@@ -40,7 +40,7 @@
 
             <!-- Status label -->
             <Label fx:id="loginStatusLabel" layoutX="80.0" layoutY="385.0" text="" />
-            <Button layoutX="196.0" layoutY="381.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="67.0" styleClass="btn-secondary" stylesheets="@styles.css" text="Back" />
+            <Button layoutX="196.0" layoutY="413.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="67.0" styleClass="btn-secondary" stylesheets="@styles.css" text="Back" />
 
          </children>
       </AnchorPane>

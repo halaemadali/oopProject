@@ -37,7 +37,10 @@ public class CancelReservationController implements Initializable {
     }
     public void setGuest(Guest g) {
         this.currentGuest = g;
-        if (guestTagLabel != null) guestTagLabel.setText(g.getUsername());
+        welcomeLabel.setText(
+                "Select a reservation below to cancel it"
+        );
+        guestTagLabel.setText(g.getUsername());
 
         List<Reservation> cancellable = new ArrayList<>();
         for (Reservation r : g.getReservations()) {

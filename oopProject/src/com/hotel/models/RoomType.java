@@ -43,11 +43,11 @@ public class RoomType {
         }
         this.category = type;
         if (type.equalsIgnoreCase("Single")) {
-            this.capacity = 1;
-            System.out.println("Category is Single, capacity automatically set to 1");
-        } else if (type.equalsIgnoreCase("Double")) {
             this.capacity = 2;
-            System.out.println("Category is Double, capacity automatically set to 2");
+            System.out.println("Category is Single, capacity automatically set to 2");
+        } else if (type.equalsIgnoreCase("Double")) {
+            this.capacity = 4;
+            System.out.println("Category is Double, capacity automatically set to 4");
         } else if (type.equalsIgnoreCase("Triple")) {
             this.capacity = 3;
             System.out.println("Category is Triple, capacity automatically set to 3");

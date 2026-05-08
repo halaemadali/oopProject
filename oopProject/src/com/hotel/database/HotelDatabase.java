@@ -35,13 +35,13 @@ public class HotelDatabase {
 
   private static void createRoomTypes() {
     // RoomType constructor adds itself to HotelDatabase.roomTypes automatically
-    RoomType single = new RoomType("Single", 1, 500);
+    RoomType single = new RoomType("Single", 2, 500);
     HotelDatabase.roomTypes.add(single);
-    RoomType duplex= new RoomType("Double", 2, 800);
+    RoomType duplex= new RoomType("Double", 4, 800);
     HotelDatabase.roomTypes.add(duplex);
     RoomType tri = new RoomType("Triple", 3, 1100);
     HotelDatabase.roomTypes.add(tri);
-    RoomType suite = new RoomType("Suite", 4, 2000);
+    RoomType suite = new RoomType("Suite", 5, 2000);
     HotelDatabase.roomTypes.add(suite);
   }
 

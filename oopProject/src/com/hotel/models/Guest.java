@@ -257,7 +257,6 @@ public class Guest {
         }
 
         toCancel.cancel();
-        reservations.remove(toCancel);
         System.out.println("Reservation for room " + roomNumber + " cancelled successfully.");
     }
 

@@ -1,5 +1,7 @@
 package com.hotel.models;
 
+import com.hotel.database.HotelDatabase;
+
 public class Amenity {
     private String name;
     private double price;   // price per unit
@@ -11,6 +13,7 @@ public class Amenity {
     }
 
     public String getName() {
+
         return name;
     }
 
@@ -20,8 +23,20 @@ public class Amenity {
 
 
     public void setName(String name) {
-        if (name == null || name.trim().isEmpty())
-            throw new IllegalArgumentException("Amenity name cannot be null or empty");
+
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Amenity name cannot be null or empty");
+        }
+        for (Amenity a : HotelDatabase.amenities) {
+
+            if (a != this &&
+                    a.getName().equalsIgnoreCase(name)) {
+
+                throw new IllegalArgumentException(
+                        "Amenity name already exists");
+            }
+        }
 
         this.name = name;
     }

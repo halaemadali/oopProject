@@ -61,6 +61,27 @@ public abstract class Staff implements Manageable{
             throw new InvalidUsernameException("Username cannot be empty");
         }
 
+        // Check guests
+        for (Guest g : HotelDatabase.guests) {
+            if (g.getUsername().equalsIgnoreCase(username)) {
+                throw new InvalidUsernameException("Username already exists");
+            }
+        }
+
+        // Check receptionists
+        for (Receptionist r : HotelDatabase.receptionists) {
+            if (r.getUsername().equalsIgnoreCase(username)) {
+                throw new InvalidUsernameException("Username already exists");
+            }
+        }
+
+        // Check admins
+        for (Admin a : HotelDatabase.admins) {
+            if (a.getUsername().equalsIgnoreCase(username)) {
+                throw new InvalidUsernameException("Username already exists");
+            }
+        }
+
         this.username = username;
     }
 
